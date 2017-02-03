@@ -1,0 +1,28 @@
+{"mc":{
+	"woman":{
+		"frameRate":2,
+		"labels":[
+			{"name":"woman","frame":1,"end":2}
+			
+			],
+		"events":[
+			
+			],
+		"frames":[
+			
+			{
+			"res":"woman1",
+			"x":0,
+			"y":0
+			},
+			{
+			"res":"woman2",
+			"x":16,
+			"y":0
+			}
+			]
+}},
+	"res":{
+		"woman1":{"x":0,"y":0,"w":220,"h":540},
+		"woman2":{"x":222,"y":0,"w":185,"h":540}
+	}}

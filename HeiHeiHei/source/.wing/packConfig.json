@@ -1,0 +1,9 @@
+{
+    "maxImageWidth": 4096,
+    "maxImageHeight": 4096,
+    "defaultResPath": "c:\\Users\\luochen\\Desktop\\heiheihei\\resource\\default.res.json",
+    "packGroups": {
+        "preload": true,
+        "game": true
+    }
+}

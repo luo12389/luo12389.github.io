@@ -1,0 +1,10 @@
+{
+  "global": {
+    "globalBindingDataTestObj": [],
+    "globalRulerEnable": true,
+    "globalAdsorbEnable": true
+  },
+  "159248772bf": {
+    "bindingDataTestObj": []
+  }
+}

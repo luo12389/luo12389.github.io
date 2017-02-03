@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="startSkin" width="640" height="1030" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<w:Config id="159248772bf"/>
+	<e:Image source="startBg_png" x="0" y="0" locked="true"/>
+	<e:Image id="startBtn" source="start_png" y="950" anchorOffsetX="114" x="320" anchorOffsetY="45" height="90" scaleX="0" scaleY="0"/>
+	<e:Image id="gameStage" y="772.16" anchorOffsetX="0" source="stage_png" x="84"/>
+	<e:Image id="light" source="light_png" y="0" width="520" anchorOffsetX="260" x="320" scaleX="1" rotation="0"/>
+	<e:Image id="shadow" source="shadow_png" y="783.27" scaleX="1" scaleY="1" horizontalCenter="0"/>
+	<e:Image id="hand1" source="hand1_png" x="371" y="504" scaleX="0" scaleY="0" alpha="1" height="160" anchorOffsetX="134" anchorOffsetY="80"/>
+	<e:Image id="hand2" source="hand2_png" x="371" y="504" alpha="1" scaleX="0" scaleY="0" anchorOffsetX="134" anchorOffsetY="80"/>
+	<e:Image id="star" source="star_png" y="140" scaleX="1" scaleY="1" alpha="0" height="670" width="585" x="28"/>
+	<e:Group id="startGroup" width="640" height="600" x="0" y="0" anchorOffsetY="600">
+		<e:Image id="title" source="title_png" y="0" x="0" anchorOffsetY="0" scaleX="1" scaleY="1"/>
+		<e:Image id="lip" source="lip_png" x="145" y="490" scaleX="0" scaleY="0" anchorOffsetX="32" anchorOffsetY="28"/>
+		<e:Image id="parts" source="parts_png" x="470" y="510" anchorOffsetY="61" scaleX="0" scaleY="0"/>
+		<e:Image id="head" source="head_png" x="426" y="454" width="110" height="140" anchorOffsetX="55" anchorOffsetY="40" scaleX="0" scaleY="0"/>
+	</e:Group>
+	<e:Image id="music" source="music_png" x="599" y="39" width="50" height="45" anchorOffsetX="25" anchorOffsetY="22.5"/>
+</e:Skin>

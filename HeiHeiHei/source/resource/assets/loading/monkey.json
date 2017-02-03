@@ -1,0 +1,28 @@
+{"mc":{
+	"monkey":{
+		"frameRate":2,
+		"labels":[
+			{"name":"monkey","frame":1,"end":2}
+			
+			],
+		"events":[
+			
+			],
+		"frames":[
+			
+			{
+			"res":"monkey1",
+			"x":0,
+			"y":0
+			},
+			{
+			"res":"monkey2",
+			"x":0,
+			"y":0
+			}
+			]
+}},
+	"res":{
+		"monkey1":{"x":0,"y":106,"w":102,"h":104},
+		"monkey2":{"x":0,"y":0,"w":102,"h":104}
+	}}
