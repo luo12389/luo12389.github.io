@@ -1,0 +1,17 @@
+{
+  "excludeScenes": [],
+  "includeAnySDK": false,
+  "includeSdk": [
+    "anysdk"
+  ],
+  "orientation": {
+    "landscapeLeft": true,
+    "landscapeRight": true,
+    "portrait": false,
+    "upsideDown": false
+  },
+  "packageName": "org.cocos2d.ChickCard",
+  "startScene": "3e5a2801-fb8d-43e8-bb15-262120573879",
+  "title": "chick",
+  "webOrientation": "auto"
+}
