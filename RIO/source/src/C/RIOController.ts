@@ -15,7 +15,7 @@ class RIOController extends egret.Sprite {
     }
 
     private init() {
-        this.addChild(new RIOIndexPage());
+        this.addChild(new RIOResultFirstPage(1, 1));
         this.addEventListener(RIOEvent.CHANGE_SCENE_EVENT, this.onChangeScene, this);
     }
 

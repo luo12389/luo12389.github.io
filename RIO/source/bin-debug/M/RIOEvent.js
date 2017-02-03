@@ -21,3 +21,4 @@ var RIOEvent = (function (_super) {
 }(egret.Event));
 RIOEvent.CHANGE_SCENE_EVENT = "changesceneevent";
 __reflect(RIOEvent.prototype, "RIOEvent");
+//# sourceMappingURL=RIOEvent.js.map

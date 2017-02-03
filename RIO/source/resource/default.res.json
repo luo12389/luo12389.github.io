@@ -5,7 +5,7 @@
 			"name": "loading"
 		},
 		{
-			"keys": "bg_mp3,writeInfo_sub_png,writeInfo_write_img_png,result1_card_hint_png,result1_card_img_png,result1_card_text_png,result1_cj_img_png,result1_cj_text_png,result1_decoration1_png,result1_decoration2_png,result1_get_png,result1_package1_img_png,result1_package1_shadow_png,result1_package1_text_png,result1_package2_img_png,result1_package2_text_png,result1_paper1_png,result1_paper2_png,result1_qianming_hint_png,result1_youhui20_img_png,result1_youhui20_text_png,result1_youhui5_img_png,result1_youhui5_text_png,result1_yy_img_png,result1_yy_text_png,result1Title_png,inde_rule_btn_png,index_bg_png,index_caijie_elipse_png,index_caijie_img_png,index_caijie_text_png,index_card_elipse_png,index_card_hint_png,index_card_img_png,index_card_text_png,index_decoration1_png,index_decoration2_png,index_hint_png,index_know_png,index_logo_png,index_lottery_png,index_package1_elipse_png,index_package1_img_png,index_package1_text_png,index_package2_elipse_png,index_package2_img_png,index_package2_text_png,index_qianming_hint_png,index_rule_img_png,index_rule_text_png,index_title_png,index_youhui20_eclispe_png,index_youhui20_img_png,index_youhui20_text_png,index_youhui5_eclispe_png,index_youhui5_img_png,index_youhui5_text_png,index_yy_elipse_png,index_yy_img_png,index_yy_text_png,result2_bg_png,result2_gary_png,result2_more_png,result2_none_png,result2_QRCode_png,result2_title_png,result2_warnning_png,result2_xinsai_png,result2_yellow_png,index_de_png",
+			"keys": "bg_mp3,writeInfo_sub_png,writeInfo_write_img_png,result1_card_hint_png,result1_card_img_png,result1_card_text_png,result1_cj_img_png,result1_cj_text_png,result1_decoration1_png,result1_decoration2_png,result1_get_png,result1_package1_img_png,result1_package1_shadow_png,result1_package1_text_png,result1_package2_img_png,result1_package2_text_png,result1_paper1_png,result1_paper2_png,result1_qianming_hint_png,result1_youhui20_img_png,result1_youhui20_text_png,result1_youhui5_img_png,result1_youhui5_text_png,result1_yy_img_png,result1_yy_text_png,result1Title_png,inde_rule_btn_png,index_bg_png,index_caijie_elipse_png,index_caijie_img_png,index_caijie_text_png,index_card_elipse_png,index_card_hint_png,index_card_img_png,index_card_text_png,index_decoration1_png,index_decoration2_png,index_hint_png,index_know_png,index_logo_png,index_lottery_png,index_package1_elipse_png,index_package1_img_png,index_package1_text_png,index_package2_elipse_png,index_package2_img_png,index_package2_text_png,index_qianming_hint_png,index_rule_img_png,index_rule_text_png,index_title_png,index_youhui20_eclispe_png,index_youhui20_img_png,index_youhui20_text_png,index_youhui5_eclispe_png,index_youhui5_img_png,index_youhui5_text_png,index_yy_elipse_png,index_yy_img_png,index_yy_text_png,result2_bg_png,result2_gary_png,result2_more_png,result2_none_png,result2_QRCode_png,result2_title_png,result2_warnning_png,result2_xinsai_png,result2_yellow_png,index_de_png,result1_yy_text2_png,result1_package1_text2_png",
 			"name": "preload"
 		}
 	],
@@ -379,6 +379,16 @@
 			"name": "index_de_png",
 			"type": "image",
 			"url": "assets/index/index_de.png"
+		},
+		{
+			"name": "result1_yy_text2_png",
+			"type": "image",
+			"url": "assets/result1/result1_yy_text.png"
+		},
+		{
+			"name": "result1_package1_text2_png",
+			"type": "image",
+			"url": "assets/result1/result1_package1_text.png"
 		}
 	]
 }
