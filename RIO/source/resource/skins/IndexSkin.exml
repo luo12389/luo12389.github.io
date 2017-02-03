@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="ImportSkin" width="640" height="1030" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<w:Config id="1596d5248d7"/>
+	<e:Image id="bg" x="0" y="0" touchEnabled="false" source="index_bg_png" locked="true"/>
+	<e:Image source="index_decoration2_png" x="0" y="140" width="640" locked="true"/>
+	<e:Image x="25" y="20" source="index_logo_png" locked="true"/>
+	<e:Image x="548" y="62.5" source="index_rule_text_png" touchEnabled="true" locked="true"/>
+	<e:Image id="title" y="190" width="510" anchorOffsetX="255" scaleX="0" anchorOffsetY="118" height="235" x="320" scaleY="0" source="index_title_png" touchEnabled="false"/>
+	<e:Image source="index_de_png" x="82.22" y="468.24"/>
+	<e:Group id="card" width="234" height="246" x="119.48" y="430" scaleX="1" alpha="0" anchorOffsetX="117" anchorOffsetY="123">
+		<e:Image x="0" y="4" width="236" source="index_card_elipse_png"/>
+		<e:Image source="index_card_img_png" y="71.44" horizontalCenter="-1.5"/>
+		<e:Image x="60" y="147.92" source="index_card_text_png"/>
+		<e:Image x="62" y="166.4" source="index_card_hint_png"/>
+	</e:Group>
+	<e:Group id="package1" width="209" height="209" y="620" alpha="0" anchorOffsetX="136" anchorOffsetY="136" x="198">
+		<e:Image x="0" y="0" source="index_package1_elipse_png"/>
+		<e:Image source="index_package1_img_png" y="49.19" x="56"/>
+		<e:Image source="index_package1_text_png" x="40.73" y="150.86"/>
+	</e:Group>
+	<e:Group id="yy" width="206" height="206" x="378" y="575.34" alpha="0" anchorOffsetY="123" anchorOffsetX="123">
+		<e:Image x="0" y="0" source="index_yy_elipse_png"/>
+		<e:Image source="index_yy_img_png" y="5.62" x="46.29"/>
+		<e:Image source="index_yy_text_png" y="146.1" x="63"/>
+		<e:Image source="index_qianming_hint_png" x="61" y="165"/>
+	</e:Group>
+	<e:Group id="package2" width="158" height="158" x="576" y="476" alpha="0" anchorOffsetX="79" anchorOffsetY="79" locked="true">
+		<e:Image x="0" y="0" source="index_package2_elipse_png"/>
+		<e:Image source="index_package2_img_png" x="-465" y="-462"/>
+		<e:Image y="117.92" horizontalCenter="1" source="index_package2_text_png"/>
+	</e:Group>
+	<e:Group id="caijie" width="142" height="142" x="594" y="310.12" alpha="0" anchorOffsetX="71" anchorOffsetY="71">
+		<e:Image x="0" y="0" source="index_caijie_elipse_png"/>
+		<e:Image source="index_caijie_img_png" y="10.22" x="31.92"/>
+		<e:Image source="index_caijie_text_png" y="109.6" x="34"/>
+		<e:Image source="index_qianming_hint_png" y="124.35" x="29"/>
+	</e:Group>
+	<e:Group id="youhui5" width="223" height="223" x="262" y="406" anchorOffsetX="93.5" anchorOffsetY="104.5" alpha="0">
+		<e:Image x="0" y="0" source="index_youhui5_eclispe_png"/>
+		<e:Image y="71.24" source="index_youhui5_img_png" x="58"/>
+		<e:Image x="65.74" y="140.48" source="index_youhui5_text_png"/>
+	</e:Group>
+	<e:Group id="youhui20" width="217" height="217" x="400" y="368.77" anchorOffsetX="108.5" anchorOffsetY="108.5" alpha="0">
+		<e:Image source="index_youhui20_eclispe_png" x="0" y="0"/>
+		<e:Image source="index_youhui20_img_png" y="68.68" x="56.52"/>
+		<e:Image source="index_youhui20_text_png" y="137.77" x="61"/>
+	</e:Group>
+	<e:Image x="548" y="21" source="inde_rule_btn_png" locked="true"/>
+	<e:Image id="hint" source="index_hint_png" y="720" alpha="0" scaleY="1" anchorOffsetX="222.5" x="320" anchorOffsetY="35"/>
+	<e:Image id="lottery" source="index_lottery_png" y="744" anchorOffsetX="124" height="88" anchorOffsetY="44" scaleX="0" scaleY="0" x="330"/>
+	<e:Group id="ruleBtn" width="129" height="111" x="511" y="0" anchorOffsetX="0" anchorOffsetY="0" touchEnabled="true"/>
+</e:Skin>

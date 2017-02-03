@@ -1,0 +1,384 @@
+{
+	"groups": [
+		{
+			"keys": "loading_bg_jpg,loading_bottle_jpg,loading_progress_bar_png,loading_progress_bg_png",
+			"name": "loading"
+		},
+		{
+			"keys": "bg_mp3,writeInfo_sub_png,writeInfo_write_img_png,result1_card_hint_png,result1_card_img_png,result1_card_text_png,result1_cj_img_png,result1_cj_text_png,result1_decoration1_png,result1_decoration2_png,result1_get_png,result1_package1_img_png,result1_package1_shadow_png,result1_package1_text_png,result1_package2_img_png,result1_package2_text_png,result1_paper1_png,result1_paper2_png,result1_qianming_hint_png,result1_youhui20_img_png,result1_youhui20_text_png,result1_youhui5_img_png,result1_youhui5_text_png,result1_yy_img_png,result1_yy_text_png,result1Title_png,inde_rule_btn_png,index_bg_png,index_caijie_elipse_png,index_caijie_img_png,index_caijie_text_png,index_card_elipse_png,index_card_hint_png,index_card_img_png,index_card_text_png,index_decoration1_png,index_decoration2_png,index_hint_png,index_know_png,index_logo_png,index_lottery_png,index_package1_elipse_png,index_package1_img_png,index_package1_text_png,index_package2_elipse_png,index_package2_img_png,index_package2_text_png,index_qianming_hint_png,index_rule_img_png,index_rule_text_png,index_title_png,index_youhui20_eclispe_png,index_youhui20_img_png,index_youhui20_text_png,index_youhui5_eclispe_png,index_youhui5_img_png,index_youhui5_text_png,index_yy_elipse_png,index_yy_img_png,index_yy_text_png,result2_bg_png,result2_gary_png,result2_more_png,result2_none_png,result2_QRCode_png,result2_title_png,result2_warnning_png,result2_xinsai_png,result2_yellow_png,index_de_png",
+			"name": "preload"
+		}
+	],
+	"resources": [
+		{
+			"url": "music/bg.mp3",
+			"type": "sound",
+			"name": "bg_mp3"
+		},
+		{
+			"url": "assets/index/inde_rule_btn.png",
+			"type": "image",
+			"name": "inde_rule_btn_png"
+		},
+		{
+			"url": "assets/index/index_bg.png",
+			"type": "image",
+			"name": "index_bg_png"
+		},
+		{
+			"url": "assets/index/index_caijie_elipse.png",
+			"type": "image",
+			"name": "index_caijie_elipse_png"
+		},
+		{
+			"url": "assets/index/index_caijie_img.png",
+			"type": "image",
+			"name": "index_caijie_img_png"
+		},
+		{
+			"url": "assets/index/index_caijie_text.png",
+			"type": "image",
+			"name": "index_caijie_text_png"
+		},
+		{
+			"url": "assets/index/index_card_elipse.png",
+			"type": "image",
+			"name": "index_card_elipse_png"
+		},
+		{
+			"url": "assets/index/index_card_hint.png",
+			"type": "image",
+			"name": "index_card_hint_png"
+		},
+		{
+			"url": "assets/index/index_card_img.png",
+			"type": "image",
+			"name": "index_card_img_png"
+		},
+		{
+			"url": "assets/index/index_card_text.png",
+			"type": "image",
+			"name": "index_card_text_png"
+		},
+		{
+			"url": "assets/index/index_decoration1.png",
+			"type": "image",
+			"name": "index_decoration1_png"
+		},
+		{
+			"url": "assets/index/index_decoration2.png",
+			"type": "image",
+			"name": "index_decoration2_png"
+		},
+		{
+			"url": "assets/index/index_hint.png",
+			"type": "image",
+			"name": "index_hint_png"
+		},
+		{
+			"url": "assets/index/index_know.png",
+			"type": "image",
+			"name": "index_know_png"
+		},
+		{
+			"url": "assets/index/index_logo.png",
+			"type": "image",
+			"name": "index_logo_png"
+		},
+		{
+			"url": "assets/index/index_lottery.png",
+			"type": "image",
+			"name": "index_lottery_png"
+		},
+		{
+			"url": "assets/index/index_package1_elipse.png",
+			"type": "image",
+			"name": "index_package1_elipse_png"
+		},
+		{
+			"url": "assets/index/index_package1_img.png",
+			"type": "image",
+			"name": "index_package1_img_png"
+		},
+		{
+			"url": "assets/index/index_package1_text.png",
+			"type": "image",
+			"name": "index_package1_text_png"
+		},
+		{
+			"url": "assets/index/index_package2_elipse.png",
+			"type": "image",
+			"name": "index_package2_elipse_png"
+		},
+		{
+			"url": "assets/index/index_package2_img.png",
+			"type": "image",
+			"name": "index_package2_img_png"
+		},
+		{
+			"url": "assets/index/index_package2_text.png",
+			"type": "image",
+			"name": "index_package2_text_png"
+		},
+		{
+			"url": "assets/index/index_qianming_hint.png",
+			"type": "image",
+			"name": "index_qianming_hint_png"
+		},
+		{
+			"url": "assets/index/index_rule_img.png",
+			"type": "image",
+			"name": "index_rule_img_png"
+		},
+		{
+			"url": "assets/index/index_rule_text.png",
+			"type": "image",
+			"name": "index_rule_text_png"
+		},
+		{
+			"url": "assets/index/index_title.png",
+			"type": "image",
+			"name": "index_title_png"
+		},
+		{
+			"url": "assets/index/index_youhui20_eclispe.png",
+			"type": "image",
+			"name": "index_youhui20_eclispe_png"
+		},
+		{
+			"url": "assets/index/index_youhui20_img.png",
+			"type": "image",
+			"name": "index_youhui20_img_png"
+		},
+		{
+			"url": "assets/index/index_youhui20_text.png",
+			"type": "image",
+			"name": "index_youhui20_text_png"
+		},
+		{
+			"url": "assets/index/index_youhui5_eclispe.png",
+			"type": "image",
+			"name": "index_youhui5_eclispe_png"
+		},
+		{
+			"url": "assets/index/index_youhui5_img.png",
+			"type": "image",
+			"name": "index_youhui5_img_png"
+		},
+		{
+			"url": "assets/index/index_youhui5_text.png",
+			"type": "image",
+			"name": "index_youhui5_text_png"
+		},
+		{
+			"url": "assets/index/index_yy_elipse.png",
+			"type": "image",
+			"name": "index_yy_elipse_png"
+		},
+		{
+			"url": "assets/index/index_yy_img.png",
+			"type": "image",
+			"name": "index_yy_img_png"
+		},
+		{
+			"url": "assets/index/index_yy_text.png",
+			"type": "image",
+			"name": "index_yy_text_png"
+		},
+		{
+			"url": "assets/loading/loading_bg.jpg",
+			"type": "image",
+			"name": "loading_bg_jpg"
+		},
+		{
+			"url": "assets/loading/loading_bottle.jpg",
+			"type": "image",
+			"name": "loading_bottle_jpg"
+		},
+		{
+			"url": "assets/loading/loading_progress_bar.png",
+			"type": "image",
+			"name": "loading_progress_bar_png"
+		},
+		{
+			"url": "assets/loading/loading_progress_bg.png",
+			"type": "image",
+			"name": "loading_progress_bg_png"
+		},
+		{
+			"url": "assets/result2/result2_QRCode.png",
+			"type": "image",
+			"name": "result2_QRCode_png"
+		},
+		{
+			"url": "assets/result2/result2_bg.png",
+			"type": "image",
+			"name": "result2_bg_png"
+		},
+		{
+			"url": "assets/result2/result2_gary.png",
+			"type": "image",
+			"name": "result2_gary_png"
+		},
+		{
+			"url": "assets/result2/result2_more.png",
+			"type": "image",
+			"name": "result2_more_png"
+		},
+		{
+			"url": "assets/result2/result2_none.png",
+			"type": "image",
+			"name": "result2_none_png"
+		},
+		{
+			"url": "assets/result2/result2_title.png",
+			"type": "image",
+			"name": "result2_title_png"
+		},
+		{
+			"url": "assets/result2/result2_warnning.png",
+			"type": "image",
+			"name": "result2_warnning_png"
+		},
+		{
+			"url": "assets/result2/result2_xinsai.png",
+			"type": "image",
+			"name": "result2_xinsai_png"
+		},
+		{
+			"url": "assets/result2/result2_yellow.png",
+			"type": "image",
+			"name": "result2_yellow_png"
+		},
+		{
+			"url": "assets/result1/result1Title.png",
+			"type": "image",
+			"name": "result1Title_png"
+		},
+		{
+			"url": "assets/result1/result1_card_hint.png",
+			"type": "image",
+			"name": "result1_card_hint_png"
+		},
+		{
+			"url": "assets/result1/result1_card_img.png",
+			"type": "image",
+			"name": "result1_card_img_png"
+		},
+		{
+			"url": "assets/result1/result1_card_text.png",
+			"type": "image",
+			"name": "result1_card_text_png"
+		},
+		{
+			"url": "assets/result1/result1_cj_img.png",
+			"type": "image",
+			"name": "result1_cj_img_png"
+		},
+		{
+			"url": "assets/result1/result1_cj_text.png",
+			"type": "image",
+			"name": "result1_cj_text_png"
+		},
+		{
+			"url": "assets/result1/result1_decoration1.png",
+			"type": "image",
+			"name": "result1_decoration1_png"
+		},
+		{
+			"url": "assets/result1/result1_decoration2.png",
+			"type": "image",
+			"name": "result1_decoration2_png"
+		},
+		{
+			"url": "assets/result1/result1_get.png",
+			"type": "image",
+			"name": "result1_get_png"
+		},
+		{
+			"url": "assets/result1/result1_package1_img.png",
+			"type": "image",
+			"name": "result1_package1_img_png"
+		},
+		{
+			"url": "assets/result1/result1_package1_shadow.png",
+			"type": "image",
+			"name": "result1_package1_shadow_png"
+		},
+		{
+			"url": "assets/result1/result1_package1_text.png",
+			"type": "image",
+			"name": "result1_package1_text_png"
+		},
+		{
+			"url": "assets/result1/result1_package2_img.png",
+			"type": "image",
+			"name": "result1_package2_img_png"
+		},
+		{
+			"url": "assets/result1/result1_package2_text.png",
+			"type": "image",
+			"name": "result1_package2_text_png"
+		},
+		{
+			"url": "assets/result1/result1_paper1.png",
+			"type": "image",
+			"name": "result1_paper1_png"
+		},
+		{
+			"url": "assets/result1/result1_paper2.png",
+			"type": "image",
+			"name": "result1_paper2_png"
+		},
+		{
+			"url": "assets/result1/result1_qianming_hint.png",
+			"type": "image",
+			"name": "result1_qianming_hint_png"
+		},
+		{
+			"url": "assets/result1/result1_youhui20_img.png",
+			"type": "image",
+			"name": "result1_youhui20_img_png"
+		},
+		{
+			"url": "assets/result1/result1_youhui20_text.png",
+			"type": "image",
+			"name": "result1_youhui20_text_png"
+		},
+		{
+			"url": "assets/result1/result1_youhui5_img.png",
+			"type": "image",
+			"name": "result1_youhui5_img_png"
+		},
+		{
+			"url": "assets/result1/result1_youhui5_text.png",
+			"type": "image",
+			"name": "result1_youhui5_text_png"
+		},
+		{
+			"url": "assets/result1/result1_yy_img.png",
+			"type": "image",
+			"name": "result1_yy_img_png"
+		},
+		{
+			"url": "assets/result1/result1_yy_text.png",
+			"type": "image",
+			"name": "result1_yy_text_png"
+		},
+		{
+			"url": "assets/writeInfo/writeInfo_sub.png",
+			"type": "image",
+			"name": "writeInfo_sub_png"
+		},
+		{
+			"url": "assets/writeInfo/writeInfo_write_img.png",
+			"type": "image",
+			"name": "writeInfo_write_img_png"
+		},
+		{
+			"name": "index_de_png",
+			"type": "image",
+			"url": "assets/index/index_de.png"
+		}
+	]
+}

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="ResultSecondSkin" width="640" height="1030" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Image x="0" y="0" source="result2_bg_png" locked="true"/>
+	<e:Image source="result2_title_png" x="119" y="71" locked="true"/>
+	<e:Group id="pingzi" width="210" height="750" y="256" alpha="1" x="153">
+		<e:Image y="0" anchorOffsetY="0" height="750" anchorOffsetX="0" width="210" x="0" scaleX="1" scaleY="1" source="result2_yellow_png"/>
+		<e:Image source="result2_xinsai_png" y="222" horizontalCenter="0"/>
+		<e:Image source="result2_none_png" y="300" x="11"/>
+		<e:Image source="result2_more_png" y="412" x="25"/>
+		<e:Image source="result2_QRCode_png" y="476" horizontalCenter="0"/>
+	</e:Group>
+</e:Skin>
