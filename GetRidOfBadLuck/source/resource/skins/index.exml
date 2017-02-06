@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="index" width="640" height="1030" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Image source="index_bg_png" x="0" y="0" locked="true"/>
+	<e:Group id="group" width="586" height="417" y="294" horizontalCenter="0" anchorOffsetX="293" anchorOffsetY="294" scaleX="0" scaleY="0">
+		<e:Image id="monster" source="index_monster_png" x="44" y="80.5" scaleX="1" scaleY="1"/>
+		<e:Image id="wing1" source="index_wing1_png" x="44" y="324" anchorOffsetX="72" anchorOffsetY="69" rotation="-10"/>
+		<e:Image id="wing2" source="index_wing2_png" x="547" y="316" anchorOffsetX="0" anchorOffsetY="77" rotation="10"/>
+		<e:Image id="title" source="index_title_png" y="0" x="0" anchorOffsetX="0" scaleX="1" scaleY="1"/>
+
+		<e:Image id="hammer" source="index_hammer_png" x="351" y="244" anchorOffsetX="125" anchorOffsetY="127" rotation="10"/>
+		<e:Image id="chick" source="index_chick_png" x="280" y="20" alpha="0"/>
+	</e:Group>
+	<e:Image id="rule" source="index_btn_png" y="868" horizontalCenter="0.5"/>
+	<e:Image id="de1" source="index_de1_png" x="46" y="430"/>
+	<e:Image id="de2" source="index_de2_png" x="354" y="430"/>
+
+	<e:Image id="click" source="index_click_png" x="474" y="722" anchorOffsetX="53.5" anchorOffsetY="53" alpha="0"/>
+	<e:Image id="hand" source="index_hand_png" x="474" y="727" alpha="0"/>
+</e:Skin>

@@ -1,0 +1,254 @@
+{
+	"groups": [
+		{
+			"keys": "config_json,index_bg_png,index_btn_png,index_chick_png,index_click_png,index_de1_png,index_de2_png,index_hammer_png,index_hand_png,index_monster_png,index_muting_png,index_title_png,index_voice_png,index_wing1_png,index_wing2_png,game_bg_png,game_chick1_png,game_chick2_png,game_chick3_png,game_life1_png,game_life2_png,game_life3_png,game_life4_png,game_life5_png,game_lifeBox_png,game_monster1_png,game_monster2_png,game_monster3_png,game_monster4_png,game_monster5_png,game_monster6_png,game_muting_png,game_voice_png,game_win1_png,game_win2_png,game_win3_png,game_win4_png,game_win5_png,game_win6_png",
+			"name": "preload"
+		},
+		{
+			"keys": "loading_bar_png,loading_barBg_png,loading_bg_png,loading_chick_png,loading_monster1_png,loading_monster2_png,loading_monster3_png,loading_wing1_png,loading_wing2_png",
+			"name": "loading"
+		}
+	],
+	"resources": [
+		{
+			"url": "config.json",
+			"type": "json",
+			"name": "config_json"
+		},
+		{
+			"url": "assets/loading/loading_bar.png",
+			"type": "image",
+			"name": "loading_bar_png"
+		},
+		{
+			"url": "assets/loading/loading_barBg.png",
+			"type": "image",
+			"name": "loading_barBg_png"
+		},
+		{
+			"url": "assets/loading/loading_bg.png",
+			"type": "image",
+			"name": "loading_bg_png"
+		},
+		{
+			"url": "assets/loading/loading_chick.png",
+			"type": "image",
+			"name": "loading_chick_png"
+		},
+		{
+			"url": "assets/loading/loading_monster1.png",
+			"type": "image",
+			"name": "loading_monster1_png"
+		},
+		{
+			"url": "assets/loading/loading_monster2.png",
+			"type": "image",
+			"name": "loading_monster2_png"
+		},
+		{
+			"url": "assets/loading/loading_monster3.png",
+			"type": "image",
+			"name": "loading_monster3_png"
+		},
+		{
+			"url": "assets/loading/loading_wing1.png",
+			"type": "image",
+			"name": "loading_wing1_png"
+		},
+		{
+			"url": "assets/loading/loading_wing2.png",
+			"type": "image",
+			"name": "loading_wing2_png"
+		},
+		{
+			"url": "assets/index/index_bg.png",
+			"type": "image",
+			"name": "index_bg_png"
+		},
+		{
+			"url": "assets/index/index_btn.png",
+			"type": "image",
+			"name": "index_btn_png"
+		},
+		{
+			"url": "assets/index/index_chick.png",
+			"type": "image",
+			"name": "index_chick_png"
+		},
+		{
+			"url": "assets/index/index_click.png",
+			"type": "image",
+			"name": "index_click_png"
+		},
+		{
+			"url": "assets/index/index_de1.png",
+			"type": "image",
+			"name": "index_de1_png"
+		},
+		{
+			"url": "assets/index/index_de2.png",
+			"type": "image",
+			"name": "index_de2_png"
+		},
+		{
+			"url": "assets/index/index_hammer.png",
+			"type": "image",
+			"name": "index_hammer_png"
+		},
+		{
+			"url": "assets/index/index_hand.png",
+			"type": "image",
+			"name": "index_hand_png"
+		},
+		{
+			"url": "assets/index/index_monster.png",
+			"type": "image",
+			"name": "index_monster_png"
+		},
+		{
+			"url": "assets/index/index_muting.png",
+			"type": "image",
+			"name": "index_muting_png"
+		},
+		{
+			"url": "assets/index/index_title.png",
+			"type": "image",
+			"name": "index_title_png"
+		},
+		{
+			"url": "assets/index/index_voice.png",
+			"type": "image",
+			"name": "index_voice_png"
+		},
+		{
+			"url": "assets/index/index_wing1.png",
+			"type": "image",
+			"name": "index_wing1_png"
+		},
+		{
+			"url": "assets/index/index_wing2.png",
+			"type": "image",
+			"name": "index_wing2_png"
+		},
+		{
+			"name": "game_bg_png",
+			"type": "image",
+			"url": "assets/game/game_bg.png"
+		},
+		{
+			"name": "game_chick1_png",
+			"type": "image",
+			"url": "assets/game/game_chick1.png"
+		},
+		{
+			"name": "game_chick2_png",
+			"type": "image",
+			"url": "assets/game/game_chick2.png"
+		},
+		{
+			"name": "game_chick3_png",
+			"type": "image",
+			"url": "assets/game/game_chick3.png"
+		},
+		{
+			"name": "game_life1_png",
+			"type": "image",
+			"url": "assets/game/game_life1.png"
+		},
+		{
+			"name": "game_life2_png",
+			"type": "image",
+			"url": "assets/game/game_life2.png"
+		},
+		{
+			"name": "game_life3_png",
+			"type": "image",
+			"url": "assets/game/game_life3.png"
+		},
+		{
+			"name": "game_life4_png",
+			"type": "image",
+			"url": "assets/game/game_life4.png"
+		},
+		{
+			"name": "game_life5_png",
+			"type": "image",
+			"url": "assets/game/game_life5.png"
+		},
+		{
+			"name": "game_lifeBox_png",
+			"type": "image",
+			"url": "assets/game/game_lifeBox.png"
+		},
+		{
+			"name": "game_monster1_png",
+			"type": "image",
+			"url": "assets/game/game_monster1.png"
+		},
+		{
+			"name": "game_monster2_png",
+			"type": "image",
+			"url": "assets/game/game_monster2.png"
+		},
+		{
+			"name": "game_monster3_png",
+			"type": "image",
+			"url": "assets/game/game_monster3.png"
+		},
+		{
+			"name": "game_monster4_png",
+			"type": "image",
+			"url": "assets/game/game_monster4.png"
+		},
+		{
+			"name": "game_monster5_png",
+			"type": "image",
+			"url": "assets/game/game_monster5.png"
+		},
+		{
+			"name": "game_monster6_png",
+			"type": "image",
+			"url": "assets/game/game_monster6.png"
+		},
+		{
+			"name": "game_muting_png",
+			"type": "image",
+			"url": "assets/game/game_muting.png"
+		},
+		{
+			"name": "game_voice_png",
+			"type": "image",
+			"url": "assets/game/game_voice.png"
+		},
+		{
+			"name": "game_win1_png",
+			"type": "image",
+			"url": "assets/game/game_win1.png"
+		},
+		{
+			"name": "game_win2_png",
+			"type": "image",
+			"url": "assets/game/game_win2.png"
+		},
+		{
+			"name": "game_win3_png",
+			"type": "image",
+			"url": "assets/game/game_win3.png"
+		},
+		{
+			"name": "game_win4_png",
+			"type": "image",
+			"url": "assets/game/game_win4.png"
+		},
+		{
+			"name": "game_win5_png",
+			"type": "image",
+			"url": "assets/game/game_win5.png"
+		},
+		{
+			"name": "game_win6_png",
+			"type": "image",
+			"url": "assets/game/game_win6.png"
+		}
+	]
+}

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="loading" width="640" height="1030" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Image source="loading_bg_png" x="0" y="0" locked="true"/>
+	<e:Image source="loading_barBg_png" y="468" horizontalCenter="0"/>
+	<e:Image id="bar" source="loading_bar_png" y="468" horizontalCenter="0"/>
+	<e:Image id="monster2" source="loading_monster2_png" x="-190" y="222"/>
+	<e:Image id="monster3" source="loading_monster3_png" x="560" y="124"/>
+	<e:Image id="monster1" source="loading_monster1_png" x="310" y="956"/>
+	<e:Image id="wing1" source="loading_wing1_png" x="289" y="368" anchorOffsetX="32" rotation="-10"/>
+	<e:Image id="wing2" source="loading_wing2_png" x="350" y="368" rotation="10"/>
+	<e:Image id="chick" y="334" horizontalCenter="0" source="loading_chick_png"/>
+	<e:Label id="barText" text="0%" y="476" horizontalCenter="0" fontFamily="Arial"/>
+</e:Skin>

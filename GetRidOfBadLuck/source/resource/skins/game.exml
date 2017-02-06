@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="game" width="640" height="1030" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Image source="index_bg_png" x="0" y="0"/>
+	<e:Image id="voiceBtn" source="game_voice_png" x="558" y="8"/>
+	<e:Image id="lifeBox" source="game_lifeBox_png" x="0" y="0"/>
+	<e:Image id="lifeText" x="152" y="34" source="game_life5_png"/>
+</e:Skin>
