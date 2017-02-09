@@ -155,23 +155,35 @@ var RIOIndexPage = (function (_super) {
             .to({ scaleX: 1, scaleY: 1 }, 150)
             .call(function () {
             //移除点击，防止再次点击
-            _this.lottery.touchEnabled = false;
+            // this.lottery.touchEnabled = false;
             //请求抽奖
-            window["btnclick"]("ChouJiang");
-            var url = window["rewardPath"];
-            var request = new egret.HttpRequest();
-            request.responseType = egret.HttpResponseType.TEXT;
-            request.open(url, egret.HttpMethod.POST);
-            request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-            request.send();
-            request.addEventListener(egret.Event.COMPLETE, _this.getData, _this);
-            request.addEventListener(egret.IOErrorEvent.IO_ERROR, _this.getError, _this);
+            // window["btnclick"]("ChouJiang");
+            // let url = window["rewardPath"];
+            // var request = new egret.HttpRequest();
+            // request.responseType = egret.HttpResponseType.TEXT;
+            // request.open(url, egret.HttpMethod.POST);
+            // request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            // request.send();
+            // request.addEventListener(egret.Event.COMPLETE, this.getData, this);
+            // request.addEventListener(egret.IOErrorEvent.IO_ERROR, this.getError, this);
+            // let rewardState = Math.floor(Math.random() * 2);
+            var rewardState = 1;
+            var rewardType;
+            if (rewardState) {
+                rewardType = Math.floor(Math.random() * 7 + 1);
+                console.log(rewardType);
+            }
+            else {
+                rewardType = Math.floor(Math.random() * 3 + 1);
+            }
+            var info = { "rewardState": rewardState, "rewardType": rewardType };
+            _this.getData(info);
         });
     };
-    RIOIndexPage.prototype.getData = function (event) {
+    RIOIndexPage.prototype.getData = function (/*event: egret.Event*/ info) {
         //得到参数
-        var request = event.currentTarget;
-        var info = JSON.parse(request.response);
+        // let request = <egret.HttpRequest>event.currentTarget;
+        // let info = JSON.parse(request.response);
         if (info.rewardState === 1 && info.rewardType) {
             console.log("抽奖成功");
             //移除监听
@@ -191,7 +203,7 @@ var RIOIndexPage = (function (_super) {
             rioEvent.obj = this;
             RIOController.getInstance().onChangeScene(rioEvent);
         }
-        else if (info.rewardState === 2 && info.rewardType) {
+        else if (info.rewardState === 0 && info.rewardType == 1) {
             if (this.hasEventListener(egret.TouchEvent.TOUCH_TAP)) {
                 this.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.music, this);
             }
@@ -208,36 +220,34 @@ var RIOIndexPage = (function (_super) {
             rioEvent.obj = this;
             RIOController.getInstance().onChangeScene(rioEvent);
         }
-        else if (info.rewardState === 0) {
+        else if (info.rewardState == 0 && info.rewardType == 2) {
             //抽奖失败
             console.log(info);
-            if (info.rewardInfo === 1) {
-                //移除监听
-                //知道按钮监听
-                this.knowBtn.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.hideRule, this);
-                //规则按钮监听
-                this.ruleBtn.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.ruleShow, this);
-                //领取奖品按钮监听
-                this.lottery.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.ruleShow, this);
-                var rioEvent = new RIOEvent(RIOEvent.CHANGE_SCENE_EVENT);
-                rioEvent.obj = this;
-                rioEvent.eventType = RIOResultSecondPage.RUN;
-                RIOController.getInstance().onChangeScene(rioEvent);
-            }
-            else if (info.rewardInfo === 2) {
-                alert("没奖品了,亲");
-                this.lottery.touchEnabled = true;
-            }
-            else if (info.rewardInfo === 3) {
-                alert("每人只有一次抽奖机会哦");
-                this.lottery.touchEnabled = true;
-            }
+            //移除监听
+            //知道按钮监听
+            this.knowBtn.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.hideRule, this);
+            //规则按钮监听
+            this.ruleBtn.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.ruleShow, this);
+            //领取奖品按钮监听
+            this.lottery.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.ruleShow, this);
+            var rioEvent = new RIOEvent(RIOEvent.CHANGE_SCENE_EVENT);
+            rioEvent.obj = this;
+            rioEvent.eventType = RIOResultSecondPage.RUN;
+            RIOController.getInstance().onChangeScene(rioEvent);
         }
-        else if (!info.rewardState || !info.rewardType) {
-            alert("数据错误");
-            //恢复点击
+        else if (info.rewardState === 0 && info.rewardType == 3) {
+            alert("没奖品了,亲");
             this.lottery.touchEnabled = true;
         }
+        else if (info.rewardState === 0 && info.rewardType == 4) {
+            alert("每人只有一次抽奖机会哦");
+            this.lottery.touchEnabled = true;
+        }
+        // else if (!info.rewardState || !info.rewardType) {
+        //     alert("数据错误");
+        //     //恢复点击
+        //     this.lottery.touchEnabled = true;
+        // }
     };
     //展示规则
     RIOIndexPage.prototype.ruleShow = function () {

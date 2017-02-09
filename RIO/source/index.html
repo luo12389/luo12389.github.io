@@ -64,55 +64,6 @@
          * "antialias": //WebGL模式下是否开启抗锯齿，true:开启，false:关闭，默认为false
          * }
          **/
-        var rewardPath = "index.php?welcome/lottery";
-        var subPath = "index.php?welcome/update_address";
-        function btnclick(typeID){
-              console.log(typeID);
-        }
-        // function getRewardData() {
-
-        var data = {
-            "rewardState": 2, //1 = 中奖成功 0 = 中奖失败   2 = 已中奖 
-            "rewardType": 5,
-        }
-
-
-        //     //中奖
-        //     // var data = {
-        //     //     "rewardState": 1, //1 = 中奖成功 0 = 中奖失败
-        //     //     "rewardType": 5, //1 杨洋签名照：20张
-        //     //                      // 2 郭采洁签名照：25张
-        //     //                     // 3 百胜100元美食卡：10张
-        //     //                     // 4 RIO微醺6连瓶新年礼包：500组 （待定）
-        //     //                       // 5 RIO微醺8连罐新年礼包：9500组 （待定）
-        //     //                      // 6 RIO电商券：140000张（具体奖券	
-        //     // }
-        //     // var data = {
-        //     //     "rewardState":0,
-        //     //     "rewardInfo":3  //1 = 没中奖  2 = 没奖品了 3 = 每人只有一次抽奖机会哦
-        //     // }
-
-        //     // //返回值接收
-        //     // return data;
-
-        //     setTimeout(function(){
-        //     var data = {
-        //           "rewardState":1, 
-        //           "rewardType":5, 
-        //      }
-        //      responseData = data;
-        //      }, 3000 )
-        // }
-
-        // //用户信息提交
-        // function getSubInfo(name, phone, address) {
-        //     console.log(name, phone, address);
-        //     var data = {
-        //         "state": 1 //1 = 成功 0 = 失败  2 = 不可重复提交信息
-        //     }
-        //     subState = data;
-        // }
-
         egret.runEgret({ renderMode: "webgl", audioType: 0 });
     </script>
 </body>

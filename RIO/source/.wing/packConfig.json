@@ -1,0 +1,10 @@
+{
+    "useClip": true,
+    "maxImageWidth": 2048,
+    "maxImageHeight": 2048,
+    "defaultResPath": "c:\\Users\\luochen\\Desktop\\luo12389.github.io\\RIO\\source\\resource\\default.res.json",
+    "packGroups": {
+        "loading": true,
+        "preload": true
+    }
+}

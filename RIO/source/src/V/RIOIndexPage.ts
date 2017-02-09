@@ -37,7 +37,7 @@ class RIOIndexPage extends eui.Component {
                 // 优惠5
                 egret.Tween.get(this.youhui5)
                     .to({ alpha: 1, y: 436 }, 1000);
-                    // 优惠20
+                // 优惠20
                 egret.Tween.get(this.youhui20)
                     .to({ alpha: 1, x: 430 }, 1000);
                 //卡
@@ -127,8 +127,8 @@ class RIOIndexPage extends eui.Component {
                     .to({ alpha: 1, scaleX: 1, scaleY: 1 }, this.duration)
                     .to({ alpha: this.anAlpha, scaleX: 1.2, scaleY: 1.2 }, this.duration)
                     .to({ alpha: 1, scaleX: 1, scaleY: 1 }, this.duration)
-                     .wait(this.duration * 4 );
-                  //libao 1
+                    .wait(this.duration * 4);
+                //libao 1
                 egret.Tween.get(this.package1, { loop: true })
                     .wait(this.duration * 4 * 6)
                     .to({ alpha: this.anAlpha, scaleX: 1.2, scaleY: 1.2 }, this.duration)
@@ -164,24 +164,37 @@ class RIOIndexPage extends eui.Component {
             .to({ scaleX: 1, scaleY: 1 }, 150)
             .call(() => {
                 //移除点击，防止再次点击
-                this.lottery.touchEnabled = false;
+                // this.lottery.touchEnabled = false;
                 //请求抽奖
-                window["btnclick"]("ChouJiang");
-                let url = window["rewardPath"];
-                var request = new egret.HttpRequest();
-                request.responseType = egret.HttpResponseType.TEXT;
-                request.open(url, egret.HttpMethod.POST);
-                request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                request.send();
-                request.addEventListener(egret.Event.COMPLETE, this.getData, this);
-                request.addEventListener(egret.IOErrorEvent.IO_ERROR, this.getError, this);
+                // window["btnclick"]("ChouJiang");
+                // let url = window["rewardPath"];
+                // var request = new egret.HttpRequest();
+                // request.responseType = egret.HttpResponseType.TEXT;
+                // request.open(url, egret.HttpMethod.POST);
+                // request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                // request.send();
+                // request.addEventListener(egret.Event.COMPLETE, this.getData, this);
+                // request.addEventListener(egret.IOErrorEvent.IO_ERROR, this.getError, this);
+
+                // let rewardState = Math.floor(Math.random() * 2);
+                let rewardState = 1;
+                let rewardType: number;
+                if (rewardState) {
+                    rewardType = Math.floor(Math.random() * 7 + 1);
+                    console.log(rewardType);
+                }
+                else {
+                    rewardType = Math.floor(Math.random() * 3 + 1);
+                }
+                let info = { "rewardState": rewardState, "rewardType": rewardType };
+                this.getData(info);
             });
     }
 
-    public getData(event: egret.Event) {
+    public getData(/*event: egret.Event*/info) {
         //得到参数
-        let request = <egret.HttpRequest>event.currentTarget;
-        let info = JSON.parse(request.response);
+        // let request = <egret.HttpRequest>event.currentTarget;
+        // let info = JSON.parse(request.response);
         if (info.rewardState === 1 && info.rewardType) {
             console.log("抽奖成功");
             //移除监听
@@ -202,8 +215,8 @@ class RIOIndexPage extends eui.Component {
             rioEvent.obj = this;
             RIOController.getInstance().onChangeScene(rioEvent);
         }
-        else if (info.rewardState === 2 && info.rewardType) {
-             if (this.hasEventListener(egret.TouchEvent.TOUCH_TAP)) {
+        else if (info.rewardState === 0 && info.rewardType == 1) {
+            if (this.hasEventListener(egret.TouchEvent.TOUCH_TAP)) {
                 this.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.music, this);
             }
             console.log("您已抽过奖");
@@ -220,39 +233,46 @@ class RIOIndexPage extends eui.Component {
             rioEvent.obj = this;
             RIOController.getInstance().onChangeScene(rioEvent);
         }
-        else if (info.rewardState === 0) {
+        else if (info.rewardState == 0 && info.rewardType == 2) {
 
             //抽奖失败
             console.log(info);
-            if (info.rewardInfo === 1) {
-                //移除监听
+            //移除监听
 
-                //知道按钮监听
-                this.knowBtn.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.hideRule, this);
-                //规则按钮监听
-                this.ruleBtn.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.ruleShow, this);
-                //领取奖品按钮监听
-                this.lottery.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.ruleShow, this);
+            //知道按钮监听
+            this.knowBtn.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.hideRule, this);
+            //规则按钮监听
+            this.ruleBtn.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.ruleShow, this);
+            //领取奖品按钮监听
+            this.lottery.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.ruleShow, this);
 
-                let rioEvent = new RIOEvent(RIOEvent.CHANGE_SCENE_EVENT);
-                rioEvent.obj = this;
-                rioEvent.eventType = RIOResultSecondPage.RUN;
-                RIOController.getInstance().onChangeScene(rioEvent);
-            }
-            else if (info.rewardInfo === 2) {
-                alert("没奖品了,亲");
-                this.lottery.touchEnabled = true;
-            }
-            else if (info.rewardInfo === 3) {
-                alert("每人只有一次抽奖机会哦");
-                this.lottery.touchEnabled = true;
-            }
+            let rioEvent = new RIOEvent(RIOEvent.CHANGE_SCENE_EVENT);
+            rioEvent.obj = this;
+            rioEvent.eventType = RIOResultSecondPage.RUN;
+            RIOController.getInstance().onChangeScene(rioEvent);
+
+            // else if (info.rewardInfo === 2) {
+            //     alert("没奖品了,亲");
+            //     this.lottery.touchEnabled = true;
+            // }
+            // else if (info.rewardInfo === 3) {
+            //     alert("每人只有一次抽奖机会哦");
+            //     this.lottery.touchEnabled = true;
+            // }
         }
-        else if (!info.rewardState || !info.rewardType) {
-            alert("数据错误");
-            //恢复点击
+        else if (info.rewardState === 0 && info.rewardType == 3) {
+            alert("没奖品了,亲");
             this.lottery.touchEnabled = true;
         }
+        else if (info.rewardState === 0 && info.rewardType == 4) {
+            alert("每人只有一次抽奖机会哦");
+            this.lottery.touchEnabled = true;
+        }
+        // else if (!info.rewardState || !info.rewardType) {
+        //     alert("数据错误");
+        //     //恢复点击
+        //     this.lottery.touchEnabled = true;
+        // }
     }
 
     //展示规则

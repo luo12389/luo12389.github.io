@@ -43,16 +43,19 @@ var RIOWriteInfoPage = (function (_super) {
                     alert("请填写地址");
                 }
                 else {
-                    var url = window["subPath"];
-                    // index.php?welcome/update_address',{username:name,tel:phone,address:address
-                    var params = "username=" + _this.user.text + "&tel=" + _this.phone.text + "&address=" + _this.address.text;
-                    var request = new egret.HttpRequest();
-                    request.responseType = egret.HttpResponseType.TEXT;
-                    request.open(url, egret.HttpMethod.POST);
-                    request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                    request.send(params);
-                    request.addEventListener(egret.Event.COMPLETE, _this.getData, _this);
-                    request.addEventListener(egret.IOErrorEvent.IO_ERROR, _this.getError, _this);
+                    // let url = window["subPath"];
+                    // // index.php?welcome/update_address',{username:name,tel:phone,address:address
+                    // var params = "username=" + this.user.text + "&tel=" + this.phone.text + "&address=" + this.address.text;
+                    // var request = new egret.HttpRequest();
+                    // request.responseType = egret.HttpResponseType.TEXT;
+                    // request.open(url, egret.HttpMethod.POST);
+                    // request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                    // request.send(params);
+                    // request.addEventListener(egret.Event.COMPLETE, this.getData, this);
+                    // request.addEventListener(egret.IOErrorEvent.IO_ERROR, this.getError, this);
+                    var randomNum = Math.floor(Math.random() * 2);
+                    var info = { state: randomNum };
+                    _this.getData(info);
                 }
             }
             else {
@@ -65,9 +68,9 @@ var RIOWriteInfoPage = (function (_super) {
             }
         });
     };
-    RIOWriteInfoPage.prototype.getData = function (event) {
-        var request = event.currentTarget;
-        var info = JSON.parse(request.response);
+    RIOWriteInfoPage.prototype.getData = function (/*event: egret.Event*/ info) {
+        // let request = <egret.HttpRequest>event.currentTarget;
+        // let info = JSON.parse(request.response);
         if (info.state && info.state === 1) {
             alert("感谢您的参与！RIO提示：10个工作日内，实物奖品将会快递送达，RIO天猫旗舰店优惠券将由短信发送至您填写的手机号码，敬请查收。");
             var rioEvent = new RIOEvent(RIOEvent.CHANGE_SCENE_EVENT);

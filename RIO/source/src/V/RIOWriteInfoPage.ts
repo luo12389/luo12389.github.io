@@ -44,16 +44,19 @@ class RIOWriteInfoPage extends eui.Component {
                         alert("请填写地址");
                     }
                     else {
-                        let url = window["subPath"];
-                        // index.php?welcome/update_address',{username:name,tel:phone,address:address
-                        var params = "username=" + this.user.text + "&tel=" + this.phone.text + "&address=" + this.address.text;
-                        var request = new egret.HttpRequest();
-                        request.responseType = egret.HttpResponseType.TEXT;
-                        request.open(url, egret.HttpMethod.POST);
-                        request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                        request.send(params);
-                        request.addEventListener(egret.Event.COMPLETE, this.getData, this);
-                        request.addEventListener(egret.IOErrorEvent.IO_ERROR, this.getError, this);
+                        // let url = window["subPath"];
+                        // // index.php?welcome/update_address',{username:name,tel:phone,address:address
+                        // var params = "username=" + this.user.text + "&tel=" + this.phone.text + "&address=" + this.address.text;
+                        // var request = new egret.HttpRequest();
+                        // request.responseType = egret.HttpResponseType.TEXT;
+                        // request.open(url, egret.HttpMethod.POST);
+                        // request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                        // request.send(params);
+                        // request.addEventListener(egret.Event.COMPLETE, this.getData, this);
+                        // request.addEventListener(egret.IOErrorEvent.IO_ERROR, this.getError, this);
+                        let randomNum = Math.floor(Math.random() * 2)
+                        let info = { state: randomNum };
+                        this.getData(info);
                     }
                 }
                 else {
@@ -67,9 +70,9 @@ class RIOWriteInfoPage extends eui.Component {
             });
     }
 
-    public getData(event: egret.Event) {
-        let request = <egret.HttpRequest>event.currentTarget;
-        let info = JSON.parse(request.response);
+    public getData(/*event: egret.Event*/info) {
+        // let request = <egret.HttpRequest>event.currentTarget;
+        // let info = JSON.parse(request.response);
         if (info.state && info.state === 1) {
 
             alert("感谢您的参与！RIO提示：10个工作日内，实物奖品将会快递送达，RIO天猫旗舰店优惠券将由短信发送至您填写的手机号码，敬请查收。");

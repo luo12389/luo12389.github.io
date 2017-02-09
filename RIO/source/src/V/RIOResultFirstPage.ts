@@ -240,7 +240,6 @@ class RIOResultFirstPage extends eui.Component {
             .to({ scaleX: .9, scaleY: .9 }, 150)
             .to({ scaleX: 1, scaleY: 1 }, 150)
             .call(() => {  //跳转场景善后工作
-                window["btnclick"]("LingJiang");
                 //传递事件
                 let rioEvent = new RIOEvent(RIOEvent.CHANGE_SCENE_EVENT);
                 rioEvent.eventType = RIOWriteInfoPage.RUN;

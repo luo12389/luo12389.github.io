@@ -229,7 +229,6 @@ var RIOResultFirstPage = (function (_super) {
             .to({ scaleX: .9, scaleY: .9 }, 150)
             .to({ scaleX: 1, scaleY: 1 }, 150)
             .call(function () {
-            window["btnclick"]("LingJiang");
             //传递事件
             var rioEvent = new RIOEvent(RIOEvent.CHANGE_SCENE_EVENT);
             rioEvent.eventType = RIOWriteInfoPage.RUN;
