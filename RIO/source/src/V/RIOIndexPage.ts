@@ -61,8 +61,6 @@ class RIOIndexPage extends eui.Component {
                 //hint
                 egret.Tween.get(this.hint)
                     .to({ y: 690, alpha: 1 }, 1000);
-
-
                 egret.Tween.get(this.lottery)
                     .to({ scaleX: 1, scaleY: 1 }, 1000, egret.Ease.elasticOut)
                     .call(() => {

@@ -1,3 +1,11 @@
+var __reflect = (this && this.__reflect) || function (p, c, t) {
+    p.__class__ = c, t ? t.push(c) : t = [c], p.__types__ = p.__types__ ? t.concat(p.__types__) : t;
+};
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
 // TypeScript file
 /**
  * Game
@@ -5,31 +13,31 @@
 var Game = (function (_super) {
     __extends(Game, _super);
     function Game() {
-        _super.call(this);
+        var _this = _super.call(this) || this;
         //猴子数组
-        this.monkeyArray = [];
+        _this.monkeyArray = [];
         //游戏开始状态
-        this.gameState = 1;
+        _this.gameState = 1;
         //速度增加间隔
-        this.interval = 0;
-        this.firstTime = 0;
-        this.secondTime = 0;
-        this.thirdTime = 0;
-        this.skinName = "resource/skins/gameSkin.exml";
+        _this.interval = 0;
+        _this.firstTime = 0;
+        _this.secondTime = 0;
+        _this.thirdTime = 0;
+        _this.skinName = "resource/skins/gameSkin.exml";
         //先播放窗帘动画
         var json = RES.getRes("curtain_json");
         var png = RES.getRes("curtain_png");
         var curtainData = new egret.MovieClipDataFactory(json, png);
-        this.curtainMC = new egret.MovieClip(curtainData.generateMovieClipData("curtain"));
-        this.curtainMC.y = 82;
+        _this.curtainMC = new egret.MovieClip(curtainData.generateMovieClipData("curtain"));
+        _this.curtainMC.y = 82;
         ;
-        this.curtainMC.addEventListener(egret.MovieClipEvent.COMPLETE, this.layOut, this);
-        this.addChild(this.curtainMC);
-        this.curtainMC.touchEnabled = true;
-        this.curtainMC.play();
+        _this.curtainMC.addEventListener(egret.MovieClipEvent.COMPLETE, _this.layOut, _this);
+        _this.addChild(_this.curtainMC);
+        _this.curtainMC.touchEnabled = true;
+        _this.curtainMC.play();
+        return _this;
     }
-    var d = __define,c=Game,p=c.prototype;
-    p.layOut = function () {
+    Game.prototype.layOut = function () {
         //创建美女
         this.beauty = new egret.Bitmap(RES.getRes("gameWoman_png"));
         this.beauty.x = 320;
@@ -80,7 +88,7 @@ var Game = (function (_super) {
         this.curtainMC.addEventListener(egret.TouchEvent.TOUCH_MOVE, this.beautyMove, this);
     };
     //游戏开始
-    p.gameStart = function (e) {
+    Game.prototype.gameStart = function (e) {
         if (this.judgeDistances(e.stageX, e.stageY) && this.gameState) {
             this.gray.alpha = 0;
             this.removeChild(this.hand);
@@ -94,7 +102,7 @@ var Game = (function (_super) {
         }
     };
     //判断距离
-    p.judgeDistances = function (x, y) {
+    Game.prototype.judgeDistances = function (x, y) {
         var distance = Math.sqrt((x - this.beauty.x) * (x - this.beauty.x) + (y - this.beauty.y) * (y - this.beauty.y));
         if (distance < 120) {
             return true;
@@ -102,7 +110,7 @@ var Game = (function (_super) {
         return false;
     };
     //美女跟随移动
-    p.beautyMove = function (e) {
+    Game.prototype.beautyMove = function (e) {
         if (this.judgeDistances(e.stageX, e.stageY)) {
             var point = this.checkPoint(e.stageX, e.stageY);
             this.beauty.x = point[0];
@@ -110,7 +118,7 @@ var Game = (function (_super) {
         }
     };
     //猴子移动和计时
-    p.monKeyMove = function () {
+    Game.prototype.monKeyMove = function () {
         this.interval++;
         for (var i = 0; i < this.monkeyArray.length; i++) {
             var monkey = this.monkeyArray[i];
@@ -152,7 +160,7 @@ var Game = (function (_super) {
         }
     };
     // 点击位置判断
-    p.checkPoint = function (x, y) {
+    Game.prototype.checkPoint = function (x, y) {
         if (x < 24) {
             x = 24;
         }
@@ -167,7 +175,7 @@ var Game = (function (_super) {
         }
         return [x, y];
     };
-    p.gameOver = function () {
+    Game.prototype.gameOver = function () {
         this.timer.stop();
         //跳出成绩
         this.gray.alpha = 1;
@@ -195,24 +203,24 @@ var Game = (function (_super) {
         shareBtn.y = 700;
         this.addChild(shareBtn);
     };
-    p.share = function () {
+    Game.prototype.share = function () {
         var arrows = new egret.Bitmap(RES.getRes("arrows_png"));
         arrows.x = 450;
         arrows.y = 0;
         this.addChild(arrows);
     };
-    p.again = function () {
+    Game.prototype.again = function () {
         var changeEvent = new ChangeSceneEvent(ChangeSceneEvent.CHANGE_SCENE_EVENT);
         changeEvent.eventType = Game.GAMERUN;
         changeEvent.obj = this;
         ViewManager.getInstance().onChangeScene(changeEvent);
     };
-    p.lerpDistance = function (aim, cur, ratio) {
+    Game.prototype.lerpDistance = function (aim, cur, ratio) {
         var delta = cur - aim;
         return Math.round(aim + delta * ratio);
     };
     // 给猴子定的坐标
-    p.setMonkeyPosition = function () {
+    Game.prototype.setMonkeyPosition = function () {
         var x = 0;
         var y = 0;
         if (Math.round(2) > 1) {
@@ -231,8 +239,7 @@ var Game = (function (_super) {
         }
         return [x, y];
     };
-    Game.GAMERUN = "GameRun";
     return Game;
 }(eui.Component));
-egret.registerClass(Game,'Game');
-//# sourceMappingURL=Game.js.map
+Game.GAMERUN = "GameRun";
+__reflect(Game.prototype, "Game");

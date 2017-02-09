@@ -14,9 +14,7 @@ class Start extends eui.Component {
     private hand1: eui.Image;
     private hand2: eui.Image;
     private head: eui.Image;
-    private music: eui.Image;
     private bgMusic: egret.Sound;
-    private musicState: number = 0;
     private soundChannel: egret.SoundChannel;
 
     private wmMC: egret.MovieClip;
@@ -26,15 +24,12 @@ class Start extends eui.Component {
     public constructor() {
         super();
         this.skinName = "resource/skins/startSkin.exml";
-        
-        this.bgMusic = RES.getRes("bgMusic_mp3");
         this.init();
     }
 
     private init() {
         this.complete();
-        
-        this.music.addEventListener(egret.TouchEvent.TOUCH_TAP, this.musicSwitch, this);
+
 
         let wmJson = RES.getRes("woman_json");
         let wmPng = RES.getRes("woman_png");
@@ -73,6 +68,14 @@ class Start extends eui.Component {
 
                 this.titleShow();
             });
+        this.addEventListener(egret.TouchEvent.TOUCH_TAP, this.musicStart, this);
+    }
+
+    public musicStart() {
+        this.bgMusic = RES.getRes("bgMusic_mp3");
+        this.soundChannel = this.bgMusic.play();
+        this.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.musicStart, this);
+        this.touchEnabled = false;
     }
 
     public complete() {
@@ -184,24 +187,6 @@ class Start extends eui.Component {
             changeEvent.eventType = Game.GAMERUN;
             changeEvent.obj = this;
             ViewManager.getInstance().onChangeScene(changeEvent);
-        }
-    }
-
-    public musicSwitch() {
-        if(this.musicState)
-        {
-            egret.Tween.removeTweens(this.music);
-            egret.Tween.get(this.music).set({rotation: 0});
-            this.soundChannel.stop();
-            this.musicState = 0;
-        }
-        else
-        {
-            egret.Tween.get(this.music, {loop : true})
-            .to({rotation: 360}, 3000);
-            this.soundChannel = this.bgMusic.play();
-            // this.soundChannel.volume = 0;
-            this.musicState = 1;
         }
     }
 }

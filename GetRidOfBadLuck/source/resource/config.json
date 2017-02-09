@@ -66,7 +66,14 @@
 		"game_alert_png": "assets/game/game_alert.png",
 		"game_passTitle_png": "assets/game/game_passTitle.png",
 		"game_pass5_text_png": "assets/game/game_pass5_text.png",
-		"game_share_png": "assets/game/game_share.png"
+		"game_share_png": "assets/game/game_share.png",
+		"game_failed_png": "assets/game/game_failed.png",
+		"game_failed_title_png": "assets/game/game_failed_title.png",
+		"game_failed_alert_png": "assets/game/game_failed_alert.png",
+		"game_failed_restart_png": "assets/game/game_failed_restart.png",
+		"game_share_chick_png": "assets/game/game_share_chick.png",
+		"game_share_gray_png": "assets/game/game_share_gray.png",
+		"game_life0_png": "assets/game/game_life0.png"
 	},
 	"groups": {
 		"preload": [
@@ -125,7 +132,13 @@
 			"game_alert_png",
 			"game_passTitle_png",
 			"game_pass5_text_png",
-			"game_share_png"
+			"game_share_png",
+			"game_failed_png",
+			"game_failed_title_png",
+			"game_failed_alert_png",
+			"game_failed_restart_png",
+			"game_share_gray_png",
+			"game_life0_png"
 		],
 		"loading": [
 			"loading_bar_png",
@@ -186,7 +199,14 @@
 				"game_alert.png": "assets/game/game_alert.png",
 				"game_passTitle.png": "assets/game/game_passTitle.png",
 				"game_pass5_text.png": "assets/game/game_pass5_text.png",
-				"game_share.png": "assets/game/game_share.png"
+				"game_share.png": "assets/game/game_share.png",
+				"game_failed.png": "assets/game/game_failed.png",
+				"game_failed_alert.png": "assets/game/game_failed_alert.png",
+				"game_failed_restart.png": "assets/game/game_failed_restart.png",
+				"game_failed_title.png": "assets/game/game_failed_title.png",
+				"game_share_chick.png": "assets/game/game_share_chick.png",
+				"game_share_gray.png": "assets/game/game_share_gray.png",
+				"game_life0.png": "assets/game/game_life0.png"
 			},
 			"index": {
 				"index_bg.png": "assets/index/index_bg.png",

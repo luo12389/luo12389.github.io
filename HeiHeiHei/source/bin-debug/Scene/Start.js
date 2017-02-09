@@ -1,3 +1,11 @@
+var __reflect = (this && this.__reflect) || function (p, c, t) {
+    p.__class__ = c, t ? t.push(c) : t = [c], p.__types__ = p.__types__ ? t.concat(p.__types__) : t;
+};
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
 // TypeScript file
 /**
  * Start
@@ -5,18 +13,15 @@
 var Start = (function (_super) {
     __extends(Start, _super);
     function Start() {
-        _super.call(this);
-        this.musicState = 0;
-        this.time = 0;
-        this.skinName = "resource/skins/startSkin.exml";
-        this.bgMusic = RES.getRes("bgMusic_mp3");
-        this.init();
+        var _this = _super.call(this) || this;
+        _this.time = 0;
+        _this.skinName = "resource/skins/startSkin.exml";
+        _this.init();
+        return _this;
     }
-    var d = __define,c=Start,p=c.prototype;
-    p.init = function () {
+    Start.prototype.init = function () {
         var _this = this;
         this.complete();
-        this.music.addEventListener(egret.TouchEvent.TOUCH_TAP, this.musicSwitch, this);
         var wmJson = RES.getRes("woman_json");
         var wmPng = RES.getRes("woman_png");
         var wmMCDF = new egret.MovieClipDataFactory(wmJson, wmPng);
@@ -52,8 +57,15 @@ var Start = (function (_super) {
                 .to({ y: 504 }, 200);
             _this.titleShow();
         });
+        this.addEventListener(egret.TouchEvent.TOUCH_TAP, this.musicStart, this);
     };
-    p.complete = function () {
+    Start.prototype.musicStart = function () {
+        this.bgMusic = RES.getRes("bgMusic_mp3");
+        this.soundChannel = this.bgMusic.play();
+        this.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.musicStart, this);
+        this.touchEnabled = false;
+    };
+    Start.prototype.complete = function () {
         var _this = this;
         //灯光动画
         var stageLight = new egret.Bitmap(RES.getRes("stageLight_png"));
@@ -83,7 +95,7 @@ var Start = (function (_super) {
                 .to({ alpha: 0.5 }, 800);
         });
     };
-    p.titleShow = function () {
+    Start.prototype.titleShow = function () {
         var _this = this;
         //标题动画
         egret.Tween.get(this.startGroup)
@@ -147,7 +159,7 @@ var Start = (function (_super) {
             _this.startBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, _this.toNextScene, _this);
         });
     };
-    p.toNextScene = function () {
+    Start.prototype.toNextScene = function () {
         if (this.startBtn.hasEventListener(egret.TouchEvent.TOUCH_TAP)) {
             this.startBtn.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.toNextScene, this);
             var changeEvent = new ChangeSceneEvent(ChangeSceneEvent.CHANGE_SCENE_EVENT);
@@ -156,23 +168,7 @@ var Start = (function (_super) {
             ViewManager.getInstance().onChangeScene(changeEvent);
         }
     };
-    p.musicSwitch = function () {
-        if (this.musicState) {
-            egret.Tween.removeTweens(this.music);
-            egret.Tween.get(this.music).set({ rotation: 0 });
-            this.soundChannel.stop();
-            this.musicState = 0;
-        }
-        else {
-            egret.Tween.get(this.music, { loop: true })
-                .to({ rotation: 360 }, 3000);
-            this.soundChannel = this.bgMusic.play();
-            // this.soundChannel.volume = 0;
-            this.musicState = 1;
-        }
-    };
-    Start.STARTRUN = "StartRun";
     return Start;
 }(eui.Component));
-egret.registerClass(Start,'Start');
-//# sourceMappingURL=Start.js.map
+Start.STARTRUN = "StartRun";
+__reflect(Start.prototype, "Start");

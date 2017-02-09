@@ -38,12 +38,11 @@ class Index extends eui.Component {
         egret.Tween.get(this.group)
             .to({ scaleX: 1, scaleY: 1 }, 1000, egret.Ease.elasticOut)
             .call(() => {
-                egret.Tween.get(this.wing1, { loop: true })
+                egret.Tween.get(this.wing1, { loop: true })   
                     .to({ rotation: 0 }, 400)
                     .to({ rotation: -10 }, 400)
                     .to({ rotation: 0 }, 400)
-                    .to({ rotation: -10 }, 400)
-                    .wait(1000);
+                    .to({ rotation: -10 }, 400);
 
                 egret.Tween.get(this.wing2, { loop: true })
                     .to({ rotation: 0 }, 400)
@@ -54,10 +53,18 @@ class Index extends eui.Component {
 
                 egret.Tween.get(this.hammer, { loop: true })
                     .to({ rotation: 0 }, 500)
-                    .to({ rotation: 10 }, 500)
+                    .to({ rotation: 10 }, 500);
 
                 egret.Tween.get(this.chick)
-                    .to({ alpha: 1 }, 500);
+                    .to({ alpha: 1 }, 500)
+                    .call(() => {
+                        let chickX = this.chick.x;
+                        let chickY = this.chick.y;
+                        egret.Tween.get(this.chick, { loop: true })
+                            .to({ x: chickX - 2, y: chickY - 5 }, 800)
+                            .wait(200)
+                            .to({ x: chickX, y: chickY}, 800);
+                    });
 
                 egret.Tween.get(this.monster, { loop: true })
                     .to({ y: 90 }, 500)

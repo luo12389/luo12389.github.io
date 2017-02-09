@@ -15,7 +15,7 @@ var ViewController = (function (_super) {
     function ViewController() {
         var _this = _super.call(this) || this;
         _this.round = 1; //回合
-        _this.interval = 3000; //间隔
+        _this.interval = 5000; //间隔
         _this.life = 5; //生命
         _this.skill = 0; //打败怪兽数量
         _this.init();
@@ -42,30 +42,22 @@ var ViewController = (function (_super) {
     ViewController.prototype.onChangeScene = function (e) {
         var game = new Game(ViewController.getInstance().round, ViewController.getInstance().interval, ViewController.getInstance().life, ViewController.getInstance().skill);
         //先判断当前关卡是第几
-        if (ViewController.getInstance().round > 1) {
-            //获取位置最前的页面
-            var lastPage = this.getChildAt(0);
-            //设定第二关进入动画
-            this.addChild(game);
-            game.y = -1030;
-            var self_1 = this;
-            egret.Tween.get(game)
-                .to({ y: 0 }, 2000)
-                .call(function () {
-                //开启计时器和监听事件
-                game.start();
-            });
-            egret.Tween.get(lastPage)
-                .to({ y: 1030 }, 2000)
-                .call(function () {
-                self_1.removeChildAt(0);
-            });
-        }
-        else {
-            this.removeChildren();
-            this.addChild(game);
+        var lastPage = this.getChildAt(0);
+        //设定第二关进入动画
+        this.addChild(game);
+        game.y = -1030;
+        var self = this;
+        egret.Tween.get(game)
+            .to({ y: 0 }, 2000)
+            .call(function () {
+            //开启计时器和监听事件
             game.start();
-        }
+        });
+        egret.Tween.get(lastPage)
+            .to({ y: 1030 }, 2000)
+            .call(function () {
+            self.removeChildAt(0);
+        });
     };
     return ViewController;
 }(egret.Sprite));

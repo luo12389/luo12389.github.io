@@ -22,7 +22,7 @@ var RIOController = (function (_super) {
         return _this;
     }
     RIOController.prototype.init = function () {
-        this.addChild(new RIOResultFirstPage(1, 1));
+        this.addChild(new RIOIndexPage());
         this.addEventListener(RIOEvent.CHANGE_SCENE_EVENT, this.onChangeScene, this);
     };
     RIOController.prototype.start = function () {

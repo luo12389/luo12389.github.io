@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="game" width="640" height="1030" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<w:Config id="15a1d2873d8"/>
 	<e:Image source="index_bg_png" x="1" y="0"/>
 	<e:Image id="voiceBtn" source="game_voice_png" x="558" y="8" anchorOffsetX="0"/>
 	<e:Image id="lifeBox" source="game_lifeBox_png" x="0" y="0"/>

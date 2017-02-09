@@ -27,8 +27,7 @@ var Index = (function (_super) {
                 .to({ rotation: 0 }, 400)
                 .to({ rotation: -10 }, 400)
                 .to({ rotation: 0 }, 400)
-                .to({ rotation: -10 }, 400)
-                .wait(1000);
+                .to({ rotation: -10 }, 400);
             egret.Tween.get(_this.wing2, { loop: true })
                 .to({ rotation: 0 }, 400)
                 .to({ rotation: 10 }, 400)
@@ -39,7 +38,15 @@ var Index = (function (_super) {
                 .to({ rotation: 0 }, 500)
                 .to({ rotation: 10 }, 500);
             egret.Tween.get(_this.chick)
-                .to({ alpha: 1 }, 500);
+                .to({ alpha: 1 }, 500)
+                .call(function () {
+                var chickX = _this.chick.x;
+                var chickY = _this.chick.y;
+                egret.Tween.get(_this.chick, { loop: true })
+                    .to({ x: chickX - 2, y: chickY - 5 }, 800)
+                    .wait(200)
+                    .to({ x: chickX, y: chickY }, 800);
+            });
             egret.Tween.get(_this.monster, { loop: true })
                 .to({ y: 90 }, 500)
                 .to({ y: 80 }, 500);

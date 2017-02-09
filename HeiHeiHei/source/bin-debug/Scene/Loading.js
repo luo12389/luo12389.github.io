@@ -1,3 +1,11 @@
+var __reflect = (this && this.__reflect) || function (p, c, t) {
+    p.__class__ = c, t ? t.push(c) : t = [c], p.__types__ = p.__types__ ? t.concat(p.__types__) : t;
+};
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
 // TypeScript file
 /**
  * Loading
@@ -5,11 +13,11 @@
 var Loading = (function (_super) {
     __extends(Loading, _super);
     function Loading() {
-        _super.call(this);
-        this.init();
+        var _this = _super.call(this) || this;
+        _this.init();
+        return _this;
     }
-    var d = __define,c=Loading,p=c.prototype;
-    p.init = function () {
+    Loading.prototype.init = function () {
         var bg = new egret.Bitmap(RES.getRes("loadingBg_png"));
         this.addChild(bg);
         var barWidth = 463;
@@ -32,7 +40,7 @@ var Loading = (function (_super) {
         this.monkeyMC.gotoAndPlay(1, -1);
         this.monkeyMC.gotoAndPlay(1, -1);
     };
-    p.startLoadingGameResource = function () {
+    Loading.prototype.startLoadingGameResource = function () {
         RES.addEventListener(RES.ResourceEvent.GROUP_COMPLETE, this.gameGroupLoadComplete, this);
         RES.addEventListener(RES.ResourceEvent.GROUP_LOAD_ERROR, this.gameGroupLoadError, this);
         RES.addEventListener(RES.ResourceEvent.GROUP_PROGRESS, this.gameGroupProgress, this);
@@ -40,7 +48,7 @@ var Loading = (function (_super) {
         RES.loadGroup("game");
     };
     //game组资源全部加载完成
-    p.gameGroupLoadComplete = function (event) {
+    Loading.prototype.gameGroupLoadComplete = function (event) {
         if (event.groupName == "game") {
             RES.removeEventListener(RES.ResourceEvent.GROUP_COMPLETE, this.gameGroupLoadComplete, this);
             RES.removeEventListener(RES.ResourceEvent.GROUP_LOAD_ERROR, this.gameGroupLoadComplete, this);
@@ -50,23 +58,23 @@ var Loading = (function (_super) {
         }
     };
     //game组资源加载失败
-    p.gameGroupLoadError = function (event) {
+    Loading.prototype.gameGroupLoadError = function (event) {
         console.warn("Group:" + event.groupName + " has failed to load");
         //忽略加载失败的项目
         //ignore loading failed projects
         this.gameGroupLoadComplete(event);
     };
     //game组加载进度
-    p.gameGroupProgress = function (event) {
+    Loading.prototype.gameGroupProgress = function (event) {
         if (event.groupName == "game") {
             this.hhhProGressBar.setProgress(event.itemsLoaded / event.itemsTotal);
         }
     };
     //game组组件加载失败
-    p.gameGroupItemLoadError = function (event) {
+    Loading.prototype.gameGroupItemLoadError = function (event) {
         console.warn("Url:" + event.resItem.url + " has failed to load");
     };
-    p.toNextScene = function () {
+    Loading.prototype.toNextScene = function () {
         var changeEvent = new ChangeSceneEvent(ChangeSceneEvent.CHANGE_SCENE_EVENT);
         changeEvent.eventType = Start.STARTRUN;
         changeEvent.obj = this;
@@ -74,5 +82,4 @@ var Loading = (function (_super) {
     };
     return Loading;
 }(eui.Component));
-egret.registerClass(Loading,'Loading');
-//# sourceMappingURL=Loading.js.map
+__reflect(Loading.prototype, "Loading");

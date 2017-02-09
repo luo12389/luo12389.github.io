@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="gameSkin" width="640" height="1030" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
-	<e:Image id="bg" source="gameBg_png" x="0" y="0" touchEnabled="true" locked="true"/>
-	<e:Image source="timer_png" y="13" x="242"/>
-	<e:Image source="music_png" x="560.72" y="10.52"/>
-	<e:Label id="playTime" text="00:00" y="22.52" anchorOffsetX="0" width="91.82" anchorOffsetY="0" height="43.64" horizontalCenter="26" verticalAlign="middle" textAlign="center"/>
-</e:Skin>

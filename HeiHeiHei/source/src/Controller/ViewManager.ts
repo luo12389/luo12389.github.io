@@ -3,6 +3,10 @@ class ViewManager extends egret.Sprite {
     public constructor() {
         super();
         this.init();
+        let channel: egret.SoundChannel;
+        let sound:egret.Sound = RES.getRes("bgMusic_mp3");
+        channel = sound.play();
+        channel.stop();
     }
  
     private static instance:ViewManager;
@@ -11,6 +15,7 @@ class ViewManager extends egret.Sprite {
     private gameScene: Game; 
 	
     private init() {
+
         this.loadingScene = new Loading()
         this.addChild(this.loadingScene);
         this.loadingScene.startLoadingGameResource();

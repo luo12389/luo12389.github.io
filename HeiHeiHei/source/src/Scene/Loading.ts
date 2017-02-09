@@ -13,8 +13,6 @@ class Loading extends eui.Component {
     }
 
     public init() {
-
-
         let bg = new egret.Bitmap(RES.getRes("loadingBg_png"));
         this.addChild(bg);
 

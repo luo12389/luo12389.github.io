@@ -1,12 +1,24 @@
+var __reflect = (this && this.__reflect) || function (p, c, t) {
+    p.__class__ = c, t ? t.push(c) : t = [c], p.__types__ = p.__types__ ? t.concat(p.__types__) : t;
+};
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
 // TypeScript file
 var ViewManager = (function (_super) {
     __extends(ViewManager, _super);
     function ViewManager() {
-        _super.call(this);
-        this.init();
+        var _this = _super.call(this) || this;
+        _this.init();
+        var channel;
+        var sound = RES.getRes("bgMusic_mp3");
+        channel = sound.play();
+        channel.stop();
+        return _this;
     }
-    var d = __define,c=ViewManager,p=c.prototype;
-    p.init = function () {
+    ViewManager.prototype.init = function () {
         this.loadingScene = new Loading();
         this.addChild(this.loadingScene);
         this.loadingScene.startLoadingGameResource();
@@ -18,7 +30,7 @@ var ViewManager = (function (_super) {
         }
         return ViewManager.instance;
     };
-    p.onChangeScene = function (e) {
+    ViewManager.prototype.onChangeScene = function (e) {
         this.removeChildren();
         switch (e.eventType) {
             case Start.STARTRUN:
@@ -33,5 +45,4 @@ var ViewManager = (function (_super) {
     };
     return ViewManager;
 }(egret.Sprite));
-egret.registerClass(ViewManager,'ViewManager');
-//# sourceMappingURL=ViewManager.js.map
+__reflect(ViewManager.prototype, "ViewManager");

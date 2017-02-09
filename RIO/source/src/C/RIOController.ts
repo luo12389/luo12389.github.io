@@ -9,13 +9,13 @@ class RIOController extends egret.Sprite {
         super();
         this.init();
         let channel: egret.SoundChannel;
-         let sound:egret.Sound = RES.getRes("bg_mp3");
-         channel = sound.play();
-         channel.stop();
+        let sound:egret.Sound = RES.getRes("bg_mp3");
+        channel = sound.play();
+        channel.stop();
     }
 
     private init() {
-        this.addChild(new RIOResultFirstPage(1, 1));
+        this.addChild(new RIOIndexPage());
         this.addEventListener(RIOEvent.CHANGE_SCENE_EVENT, this.onChangeScene, this);
     }
 
