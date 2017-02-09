@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="ResultOneSkin" width="640" height="1030" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Image source="index_bg_png" x="0" y="0" locked="true"/>
+	<e:Image source="index_logo_png" x="25" y="20" locked="true"/>
+	<e:Image source="result1Title_png" x="159" top="62"/>
+	<e:Image id="getPrize" source="result1_get_png" y="621" anchorOffsetX="108" anchorOffsetY="37.5" x="320" alpha="0"/>
+</e:Skin>

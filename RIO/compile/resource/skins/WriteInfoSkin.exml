@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="WriteInfoSkin" width="640" height="1030" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Image source="index_bg_png" x="0" y="0" locked="true"/>
+	<e:Image source="index_logo_png" x="25" y="20" locked="true"/>
+	<e:Image id="title" source="index_title_png" y="74" horizontalCenter="0.5"/>
+	<e:Image id="info" source="writeInfo_write_img_png" y="554.66" anchorOffsetX="244" x="316.96" anchorOffsetY="228.5" scaleX="0" scaleY="0"/>
+	<e:EditableText id="user" width="316" height="58" text="" x="200" y="415.44" anchorOffsetY="0" size="25" anchorOffsetX="0" verticalAlign="bottom"/>
+	<e:EditableText id="phone" width="316" height="58" text="" x="201.52" y="476.95" anchorOffsetY="0" size="25" verticalAlign="bottom" anchorOffsetX="0"/>
+	<e:EditableText id="address" width="316" height="80.67" text="" y="568.59" anchorOffsetX="0" x="200" multiline="true" anchorOffsetY="0" lineSpacing="30" size="25" wordWrap="true" verticalAlign="justify" prompt="优惠券无需填写地址" promptColor="0xcecece"/>
+	<e:Image id="sub" source="writeInfo_sub_png" y="713.2" alpha="1" anchorOffsetX="108" anchorOffsetY="38" scaleX="0" scaleY="0" x="320"/>
+</e:Skin>
