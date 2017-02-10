@@ -1,11 +1,11 @@
 {
 	"groups": [
 		{
-			"keys": "config_json,game_bg_png,game_chick1_png,game_chick2_png,game_chick3_png,game_enterRound_png,game_gary_png,game_life1_png,game_life2_png,game_life3_png,game_life4_png,game_life5_png,game_lifeBox_png,game_light_png,game_monster1_png,game_monster2_png,game_monster3_png,game_monster4_png,game_monster5_png,game_monster6_png,game_muting_png,game_pass1_star_png,game_pass1_text_png,game_pass2_star_png,game_pass2_text_png,game_pass3_star_png,game_pass3_text_png,game_pass4_star_png,game_pass4_text_png,game_pass5_star_png,game_restart_png,game_voice_png,game_win1_png,game_win2_png,game_win3_png,game_win4_png,game_win5_png,game_win6_png,index_bg_png,index_btn_png,index_chick_png,index_click_png,index_de1_png,index_de2_png,index_hammer_png,index_hand_png,index_monster_png,index_muting_png,index_title_png,index_voice_png,index_wing1_png,index_wing2_png,game_alert_png,game_passTitle_png,game_pass5_text_png,game_share_png,game_failed_png,game_failed_title_png,game_failed_alert_png,game_failed_restart_png,game_share_gray_png,game_life0_png",
+			"keys": "game_bg_png,game_chick1_png,game_chick2_png,game_chick3_png,game_enterRound_png,game_gary_png,game_life1_png,game_life2_png,game_life3_png,game_life4_png,game_life5_png,game_lifeBox_png,game_light_png,game_monster1_png,game_monster2_png,game_monster3_png,game_monster4_png,game_monster5_png,game_monster6_png,game_muting_png,game_pass1_text_png,game_pass2_text_png,game_pass3_text_png,game_pass4_text_png,game_restart_png,game_voice_png,game_win1_png,game_win2_png,game_win3_png,game_win4_png,game_win5_png,game_win6_png,index_bg_png,index_btn_png,index_chick_png,index_click_png,index_de1_png,index_de2_png,index_hammer_png,index_hand_png,index_monster_png,index_muting_png,index_title_png,index_voice_png,index_wing1_png,index_wing2_png,game_alert_png,game_passTitle_png,game_pass5_text_png,game_share_png,game_failed_png,game_failed_title_png,game_failed_alert_png,game_failed_restart_png,game_share_gray_png,game_life0_png,game_star_dark1_png,game_star_dark2_png,game_star_dark3_png,game_star_dark4_png,game_star_dark5_png,game_star_light1_png,game_star_light2_png,game_star_light3_png,game_star_light4_png,game_star_light5_png",
 			"name": "preload"
 		},
 		{
-			"keys": "loading_bar_png,loading_barBg_png,loading_bg_png,loading_chick_png,loading_monster1_png,loading_monster2_png,loading_monster3_png,loading_wing1_png,loading_wing2_png",
+			"keys": "loading_bar_png,loading_barBg_png,loading_bg_png,loading_chick_png,loading_monster1_png,loading_monster2_png,loading_monster3_png,loading_wing1_png,loading_wing2_png,config_json",
 			"name": "loading"
 		}
 	],
@@ -116,19 +116,9 @@
 			"name": "game_muting_png"
 		},
 		{
-			"url": "assets/game/game_pass1_star.png",
-			"type": "image",
-			"name": "game_pass1_star_png"
-		},
-		{
 			"url": "assets/game/game_pass1_text.png",
 			"type": "image",
 			"name": "game_pass1_text_png"
-		},
-		{
-			"url": "assets/game/game_pass2_star.png",
-			"type": "image",
-			"name": "game_pass2_star_png"
 		},
 		{
 			"url": "assets/game/game_pass2_text.png",
@@ -136,29 +126,14 @@
 			"name": "game_pass2_text_png"
 		},
 		{
-			"url": "assets/game/game_pass3_star.png",
-			"type": "image",
-			"name": "game_pass3_star_png"
-		},
-		{
 			"url": "assets/game/game_pass3_text.png",
 			"type": "image",
 			"name": "game_pass3_text_png"
 		},
 		{
-			"url": "assets/game/game_pass4_star.png",
-			"type": "image",
-			"name": "game_pass4_star_png"
-		},
-		{
 			"url": "assets/game/game_pass4_text.png",
 			"type": "image",
 			"name": "game_pass4_text_png"
-		},
-		{
-			"url": "assets/game/game_pass5_star.png",
-			"type": "image",
-			"name": "game_pass5_star_png"
 		},
 		{
 			"url": "assets/game/game_restart.png",
@@ -364,6 +339,56 @@
 			"url": "assets/game/game_life0.png",
 			"type": "image",
 			"name": "game_life0_png"
+		},
+		{
+			"url": "assets/game/game_star_dark1.png",
+			"type": "image",
+			"name": "game_star_dark1_png"
+		},
+		{
+			"url": "assets/game/game_star_dark2.png",
+			"type": "image",
+			"name": "game_star_dark2_png"
+		},
+		{
+			"url": "assets/game/game_star_dark3.png",
+			"type": "image",
+			"name": "game_star_dark3_png"
+		},
+		{
+			"url": "assets/game/game_star_dark4.png",
+			"type": "image",
+			"name": "game_star_dark4_png"
+		},
+		{
+			"url": "assets/game/game_star_dark5.png",
+			"type": "image",
+			"name": "game_star_dark5_png"
+		},
+		{
+			"url": "assets/game/game_star_light1.png",
+			"type": "image",
+			"name": "game_star_light1_png"
+		},
+		{
+			"url": "assets/game/game_star_light2.png",
+			"type": "image",
+			"name": "game_star_light2_png"
+		},
+		{
+			"url": "assets/game/game_star_light3.png",
+			"type": "image",
+			"name": "game_star_light3_png"
+		},
+		{
+			"url": "assets/game/game_star_light4.png",
+			"type": "image",
+			"name": "game_star_light4_png"
+		},
+		{
+			"url": "assets/game/game_star_light5.png",
+			"type": "image",
+			"name": "game_star_light5_png"
 		}
 	]
 }

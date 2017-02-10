@@ -422,8 +422,6 @@ var Game = (function (_super) {
         var title;
         var textImg;
         var text;
-        var starImg;
-        var star;
         alertGroup = new eui.Group();
         alertGroup.width = 500;
         alertGroup.height = 500;
@@ -440,23 +438,18 @@ var Game = (function (_super) {
             switch (round) {
                 case 1:
                     textImg = "game_pass1_text_png";
-                    starImg = "game_pass1_star_png";
                     break;
                 case 2:
                     textImg = "game_pass2_text_png";
-                    starImg = "game_pass2_star_png";
                     break;
                 case 3:
                     textImg = "game_pass3_text_png";
-                    starImg = "game_pass3_star_png";
                     break;
                 case 4:
                     textImg = "game_pass4_text_png";
-                    starImg = "game_pass4_star_png";
                     break;
                 case 5:
                     textImg = "game_pass5_text_png";
-                    starImg = "game_pass5_star_png";
                     break;
             }
             alertImg = "game_alert_png";
@@ -466,7 +459,6 @@ var Game = (function (_super) {
             alertImg = "game_failed_alert_png";
             titleImg = "game_failed_title_png";
             textImg = "game_failed_png";
-            starImg = "game_monster1_png";
             var skillNum = new eui.Label();
             skillNum.text = ViewController.getInstance().skill.toString();
             skillNum.x = 205;
@@ -484,11 +476,6 @@ var Game = (function (_super) {
         alert.y = 50;
         this.setBitmap(alert);
         alertGroup.addChildAt(alert, 0);
-        star = new egret.Bitmap(RES.getRes(starImg));
-        star.y = 170;
-        star.alpha = 0;
-        this.setBitmap(star);
-        alertGroup.addChild(star);
         title = new egret.Bitmap(RES.getRes(titleImg));
         this.setBitmap(title);
         alertGroup.addChild(title);
@@ -548,13 +535,51 @@ var Game = (function (_super) {
             this.restart.scaleX = 0;
             this.restart.scaleY = 0;
             alertGroup.addChild(this.restart);
-            egret.Tween.get(this.restart)
-                .wait(2000)
-                .to({ scaleX: 1, scaleY: 1 }, 1500, egret.Ease.elasticOut)
-                .call(function () {
-                _this.restart.touchEnabled = true;
-                _this.restart.addEventListener(egret.TouchEvent.TOUCH_TAP, _this.restartGame, _this);
-            });
+        }
+        if (this.passBool) {
+            //出现星星
+            var star1Res = "";
+            var star2Res = "";
+            var star3Res = "";
+            var star4Res = "";
+            var star5Res = "";
+            switch (round) {
+                case 1:
+                    star1Res = "game_star_light1_png";
+                    star2Res = "game_star_dark2_png";
+                    star3Res = "game_star_dark3_png";
+                    star4Res = "game_star_dark4_png";
+                    star5Res = "game_star_dark5_png";
+                    break;
+                case 2:
+                    star1Res = "game_star_light1_png";
+                    star2Res = "game_star_light2_png";
+                    star3Res = "game_star_dark3_png";
+                    star4Res = "game_star_dark4_png";
+                    star5Res = "game_star_dark5_png";
+                    break;
+                case 3:
+                    star1Res = "game_star_light1_png";
+                    star2Res = "game_star_light2_png";
+                    star3Res = "game_star_light3_png";
+                    star4Res = "game_star_dark4_png";
+                    star5Res = "game_star_dark5_png";
+                    break;
+                case 4:
+                    star1Res = "game_star_light1_png";
+                    star2Res = "game_star_light2_png";
+                    star3Res = "game_star_light3_png";
+                    star4Res = "game_star_light4_png";
+                    star5Res = "game_star_dark5_png";
+                    break;
+                case 5:
+                    star1Res = "game_star_light1_png";
+                    star2Res = "game_star_light2_png";
+                    star3Res = "game_star_light3_png";
+                    star4Res = "game_star_light4_png";
+                    star5Res = "game_star_light5_png";
+                    break;
+            }
         }
         egret.Tween.get(alertGroup)
             .to({ y: 160 }, 1200, egret.Ease.elasticOut)
@@ -563,10 +588,15 @@ var Game = (function (_super) {
                 egret.Tween.get(light)
                     .to({ alpha: 1 }, 500);
             }
-            egret.Tween.get(star)
-                .to({ y: 125, alpha: 1 }, 800);
             egret.Tween.get(text)
                 .to({ alpha: 1 }, 500);
+        });
+        egret.Tween.get(this.restart)
+            .wait(2000)
+            .to({ scaleX: 1, scaleY: 1 }, 1500, egret.Ease.elasticOut)
+            .call(function () {
+            _this.restart.touchEnabled = true;
+            _this.restart.addEventListener(egret.TouchEvent.TOUCH_TAP, _this.restartGame, _this);
         });
     };
     Game.prototype.restartGame = function () {

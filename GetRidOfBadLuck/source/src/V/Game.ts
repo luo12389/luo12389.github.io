@@ -447,8 +447,6 @@ class Game extends eui.Component {
         let title: egret.Bitmap;
         let textImg: string;
         let text: egret.Bitmap;
-        let starImg: string;
-        let star: egret.Bitmap;
 
         alertGroup = new eui.Group();
         alertGroup.width = 500;
@@ -467,23 +465,18 @@ class Game extends eui.Component {
             switch (round) {
                 case 1:
                     textImg = "game_pass1_text_png";
-                    starImg = "game_pass1_star_png";
                     break;
                 case 2:
                     textImg = "game_pass2_text_png";
-                    starImg = "game_pass2_star_png";
                     break;
                 case 3:
                     textImg = "game_pass3_text_png";
-                    starImg = "game_pass3_star_png";
                     break;
                 case 4:
                     textImg = "game_pass4_text_png";
-                    starImg = "game_pass4_star_png";
                     break;
                 case 5:
                     textImg = "game_pass5_text_png";
-                    starImg = "game_pass5_star_png";
                     break;
             }
 
@@ -494,7 +487,6 @@ class Game extends eui.Component {
             alertImg = "game_failed_alert_png";
             titleImg = "game_failed_title_png";
             textImg = "game_failed_png";
-            starImg = "game_monster1_png";
 
             let skillNum = new eui.Label();
             skillNum.text = ViewController.getInstance().skill.toString();
@@ -517,11 +509,7 @@ class Game extends eui.Component {
         this.setBitmap(alert);
         alertGroup.addChildAt(alert, 0);
 
-        star = new egret.Bitmap(RES.getRes(starImg));
-        star.y = 170;
-        star.alpha = 0;
-        this.setBitmap(star);
-        alertGroup.addChild(star);
+
 
 
         title = new egret.Bitmap(RES.getRes(titleImg));
@@ -589,14 +577,51 @@ class Game extends eui.Component {
             this.restart.scaleX = 0;
             this.restart.scaleY = 0;
             alertGroup.addChild(this.restart);
-
-            egret.Tween.get(this.restart)
-                .wait(2000)
-                .to({ scaleX: 1, scaleY: 1 }, 1500, egret.Ease.elasticOut)
-                .call(() => {
-                    this.restart.touchEnabled = true;
-                    this.restart.addEventListener(egret.TouchEvent.TOUCH_TAP, this.restartGame, this);
-                })
+        }
+        if (this.passBool) {
+            //出现星星
+            let star1Res = "";
+            let star2Res = "";
+            let star3Res = "";
+            let star4Res = "";
+            let star5Res = "";
+            switch (round) {
+                case 1:
+                    star1Res = "game_star_light1_png";
+                    star2Res = "game_star_dark2_png";
+                    star3Res = "game_star_dark3_png";
+                    star4Res = "game_star_dark4_png";
+                    star5Res = "game_star_dark5_png";
+                    break;
+                case 2:
+                    star1Res = "game_star_light1_png";
+                    star2Res = "game_star_light2_png";
+                    star3Res = "game_star_dark3_png";
+                    star4Res = "game_star_dark4_png";
+                    star5Res = "game_star_dark5_png";
+                    break;
+                case 3:
+                    star1Res = "game_star_light1_png";
+                    star2Res = "game_star_light2_png";
+                    star3Res = "game_star_light3_png";
+                    star4Res = "game_star_dark4_png";
+                    star5Res = "game_star_dark5_png";
+                    break;
+                case 4:
+                    star1Res = "game_star_light1_png";
+                    star2Res = "game_star_light2_png";
+                    star3Res = "game_star_light3_png";
+                    star4Res = "game_star_light4_png";
+                    star5Res = "game_star_dark5_png";
+                    break;
+                case 5:
+                    star1Res = "game_star_light1_png";
+                    star2Res = "game_star_light2_png";
+                    star3Res = "game_star_light3_png";
+                    star4Res = "game_star_light4_png";
+                    star5Res = "game_star_light5_png";
+                    break;
+            }
         }
         egret.Tween.get(alertGroup)
             .to({ y: 160 }, 1200, egret.Ease.elasticOut)
@@ -605,10 +630,15 @@ class Game extends eui.Component {
                     egret.Tween.get(light)
                         .to({ alpha: 1 }, 500);
                 }
-                egret.Tween.get(star)
-                    .to({ y: 125, alpha: 1 }, 800);
                 egret.Tween.get(text)
                     .to({ alpha: 1 }, 500);
+            });
+        egret.Tween.get(this.restart)
+            .wait(2000)
+            .to({ scaleX: 1, scaleY: 1 }, 1500, egret.Ease.elasticOut)
+            .call(() => {
+                this.restart.touchEnabled = true;
+                this.restart.addEventListener(egret.TouchEvent.TOUCH_TAP, this.restartGame, this);
             });
     }
 

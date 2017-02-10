@@ -10,7 +10,7 @@
 		<e:Image id="hammer" source="index_hammer_png" x="351" y="244" anchorOffsetX="125" anchorOffsetY="127" rotation="10"/>
 		<e:Image id="chick" source="index_chick_png" x="280" y="20" alpha="0"/>
 	</e:Group>
-	<e:Image id="rule" source="index_btn_png" y="868" horizontalCenter="0.5"/>
+	<e:Image id="rule" y="868" horizontalCenter="0.5" source="index_btn_png"/>
 	<e:Image id="de1" source="index_de1_png" x="46" y="430"/>
 	<e:Image id="de2" source="index_de2_png" x="354" y="430"/>
 
