@@ -39,27 +39,60 @@ var LoadingUI = (function (_super) {
     function LoadingUI() {
         var _this = _super.call(this) || this;
         _this.skinName = "resource/skins/loading.exml";
-        egret.Tween.get(_this.monster2, { loop: true })
-            .to({ x: -54 }, 2000)
-            .to({ x: -190 }, 2000);
-        egret.Tween.get(_this.monster3, { loop: true })
-            .to({ x: 452 }, 2000)
-            .to({ x: 560 }, 2000);
-        egret.Tween.get(_this.monster1, { loop: true })
-            .to({ y: 835 }, 2000)
-            .to({ y: 956 }, 2000);
-        egret.Tween.get(_this.wing1, { loop: true })
-            .to({ rotation: 0 }, 300)
-            .to({ rotation: -10 }, 300)
-            .to({ rotation: 0 }, 300)
-            .to({ rotation: -10 }, 300)
-            .wait(1000);
-        egret.Tween.get(_this.wing2, { loop: true })
-            .to({ rotation: 0 }, 300)
-            .to({ rotation: 10 }, 300)
-            .to({ rotation: 0 }, 300)
-            .to({ rotation: 10 }, 300)
-            .wait(1000);
+        //小鸡帧动画
+        var chickPng = RES.getRes("loading_chick_png");
+        var chickJson = RES.getRes("loading_chick_json");
+        var chickMCDF = new egret.MovieClipDataFactory(chickJson, chickPng);
+        var chickMC = new egret.MovieClip(chickMCDF.generateMovieClipData("444"));
+        chickMC.anchorOffsetX = chickMC.width / 2;
+        chickMC.x = 320;
+        chickMC.y = 320;
+        _this.addChild(chickMC);
+        //怪物1帧动画
+        var monster1Png = RES.getRes("loading_monster1_png");
+        var monster1Json = RES.getRes("loading_monster1_json");
+        var monster1MCDF = new egret.MovieClipDataFactory(monster1Json, monster1Png);
+        var monster1MC = new egret.MovieClip(monster1MCDF.generateMovieClipData("111"));
+        monster1MC.x = 700;
+        monster1MC.y = 300;
+        monster1MC.anchorOffsetX = monster1MC.width;
+        monster1MC.anchorOffsetY = monster1MC.height;
+        monster1MC.rotation = 60;
+        _this.addChild(monster1MC);
+        //怪物2帧动画
+        var monster2Png = RES.getRes("loading_monster2_png");
+        var monster2Json = RES.getRes("loading_monster2_json");
+        var monster2MCDF = new egret.MovieClipDataFactory(monster2Json, monster2Png);
+        var monster2MC = new egret.MovieClip(monster2MCDF.generateMovieClipData("222"));
+        monster2MC.x = -420;
+        monster2MC.y = 560;
+        _this.addChild(monster2MC);
+        //怪物3帧动画
+        var monster3Png = RES.getRes("loading_monster3_png");
+        var monster3Json = RES.getRes("loading_monster3_json");
+        var monster3MCDF = new egret.MovieClipDataFactory(monster3Json, monster3Png);
+        var monster3MC = new egret.MovieClip(monster3MCDF.generateMovieClipData("333"));
+        monster3MC.x = 420;
+        monster3MC.y = 1010;
+        _this.addChild(monster3MC);
+        egret.Tween.get(monster1MC)
+            .wait(300)
+            .to({ rotation: -10 }, 500)
+            .call(function () {
+            monster1MC.play(-1);
+        });
+        egret.Tween.get(monster2MC)
+            .to({ x: -290, y: 400 }, 500)
+            .call(function () {
+            monster2MC.play(-1);
+        });
+        egret.Tween.get(monster3MC)
+            .wait(600)
+            .to({ x: 400, y: 780 }, 500)
+            .call(function () {
+            monster3MC.play(-1);
+            chickMC.play(-1);
+        });
         return _this;
     }
     LoadingUI.prototype.setProgress = function (num) {
@@ -70,4 +103,3 @@ var LoadingUI = (function (_super) {
     return LoadingUI;
 }(eui.Component));
 __reflect(LoadingUI.prototype, "LoadingUI");
-//# sourceMappingURL=LoadingUI.js.map

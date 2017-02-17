@@ -19,76 +19,72 @@ var Index = (function (_super) {
         return _this;
     }
     Index.prototype.init = function () {
-        var _this = this;
-        egret.Tween.get(this.group)
-            .to({ scaleX: 1, scaleY: 1 }, 1000, egret.Ease.elasticOut)
+        var titlePng = RES.getRes("index_title_png");
+        var titleJson = RES.getRes("index_title_json");
+        var titleMCDF = new egret.MovieClipDataFactory(titleJson, titlePng);
+        var titleMC = new egret.MovieClip(titleMCDF.generateMovieClipData("123"));
+        titleMC.anchorOffsetX = titleMC.width / 2;
+        titleMC.anchorOffsetY = titleMC.height / 2;
+        titleMC.x = 330;
+        titleMC.y = 220;
+        titleMC.scaleX = 0;
+        titleMC.scaleY = 0;
+        this.addChild(titleMC);
+        egret.Tween.get(titleMC)
+            .to({ scaleX: 1, scaleY: 1 }, 2000, egret.Ease.elasticOut)
             .call(function () {
-            egret.Tween.get(_this.wing1, { loop: true })
-                .to({ rotation: 0 }, 400)
-                .to({ rotation: -10 }, 400)
-                .to({ rotation: 0 }, 400)
-                .to({ rotation: -10 }, 400);
-            egret.Tween.get(_this.wing2, { loop: true })
-                .to({ rotation: 0 }, 400)
-                .to({ rotation: 10 }, 400)
-                .to({ rotation: 0 }, 400)
-                .to({ rotation: 10 }, 400)
-                .wait(1000);
-            egret.Tween.get(_this.hammer, { loop: true })
-                .to({ rotation: 0 }, 500)
-                .to({ rotation: 10 }, 500);
-            egret.Tween.get(_this.chick)
-                .to({ alpha: 1 }, 500)
-                .call(function () {
-                var chickX = _this.chick.x;
-                var chickY = _this.chick.y;
-                egret.Tween.get(_this.chick, { loop: true })
-                    .to({ x: chickX - 2, y: chickY - 5 }, 800)
-                    .wait(200)
-                    .to({ x: chickX, y: chickY }, 800);
-            });
-            egret.Tween.get(_this.monster, { loop: true })
-                .to({ y: 90 }, 500)
-                .to({ y: 80 }, 500);
+            titleMC.play(-1);
         });
-        egret.Tween.get(this.hand)
-            .wait(1000)
-            .to({ alpha: 1 }, 800)
-            .call(function () {
-            egret.Tween.get(_this.hand, { loop: true })
-                .to({ scaleX: 0.85, scaleY: 0.85 }, 600, egret.Ease.cubicInOut)
-                .to({ scaleX: 1, scaleY: 1 }, 600)
-                .to({ scaleX: 0.85, scaleY: 0.85 }, 600, egret.Ease.cubicInOut)
-                .to({ scaleX: 1, scaleY: 1, alpha: 0 }, 800, egret.Ease.quartInOut)
-                .wait(500);
-        });
-        egret.Tween.get(this.click)
-            .wait(1000)
-            .to({ alpha: 1 }, 800)
-            .call(function () {
-            _this.click.touchEnabled = true;
-            _this.click.addEventListener(egret.TouchEvent.TOUCH_TAP, _this.gameStart, _this);
-            _this.rule.touchEnabled = true;
-            _this.rule.addEventListener(egret.TouchEvent.TOUCH_TAP, _this.ruleInfo, _this);
-            egret.Tween.get(_this.click, { loop: true })
-                .set({ touchEnabled: true })
-                .to({ scaleX: 0.85, scaleY: 0.85 }, 600, egret.Ease.cubicInOut)
-                .to({ scaleX: 1, scaleY: 1 }, 600)
-                .to({ scaleX: 0.85, scaleY: 0.85 }, 600, egret.Ease.cubicInOut)
-                .to({ scaleX: 1, scaleY: 1, alpha: 0 }, 800, egret.Ease.quartInOut)
-                .set({ touchEnabled: false })
-                .wait(500);
-        });
+        var chickPng = RES.getRes("index_de2_png");
+        var chickJson = RES.getRes("index_de2_json");
+        var chickMCDF = new egret.MovieClipDataFactory(chickJson, chickPng);
+        var chickMC = new egret.MovieClip(chickMCDF.generateMovieClipData("777"));
+        chickMC.x = 50;
+        chickMC.y = 430;
+        this.addChild(chickMC);
+        chickMC.play(-1);
+        var monsterPng = RES.getRes("index_de1_png");
+        var monsterJson = RES.getRes("index_de1_json");
+        var monsterMCDF = new egret.MovieClipDataFactory(monsterJson, monsterPng);
+        var monsterMC = new egret.MovieClip(monsterMCDF.generateMovieClipData("666"));
+        monsterMC.x = 590 - monsterMC.width;
+        monsterMC.y = 430;
+        this.addChild(monsterMC);
+        monsterMC.play(-1);
+        var clickPng = RES.getRes("index_click_png");
+        var clickJson = RES.getRes("index_click_json");
+        var clickMCDF = new egret.MovieClipDataFactory(clickJson, clickPng);
+        var clickMC = new egret.MovieClip(clickMCDF.generateMovieClipData("888"));
+        clickMC.x = 420;
+        clickMC.y = 650;
+        clickMC.play(-1);
+        this.addChild(clickMC);
+        clickMC.touchEnabled = true;
+        clickMC.addEventListener(egret.TouchEvent.TOUCH_TAP, this.gameStart, this);
+        // egret.Tween.get(this.musicBtn, {loop:true})
+        //     .to({ rotation: 360 }, 3000);
+        // this.musicBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, this.musicSwitch, this);
+        // this.addEventListener(egret.TouchEvent.TOUCH_TAP, this.stageClick, this);
     };
+    // public musicSwitch() {
+    //     if (this.hasEventListener(egret.TouchEvent.TOUCH_TAP)) {
+    //         this.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.stageClick, this);
+    //     }
+    // }
+    // public stageClick() {
+    // }
     Index.prototype.gameStart = function () {
         var viewEvent = new ViewEvent(ViewEvent.CHANGE_SCENE_EVENT);
         viewEvent.eventType = Game.GAMERUN;
         ViewController.getInstance().onChangeScene(viewEvent);
     };
     Index.prototype.ruleInfo = function () {
-        console.log("游戏规则");
+        egret.Tween.get(this.rule)
+            .set({ touchEnabled: false })
+            .to({ scaleX: 0.9, scaleY: 0.9 }, 150)
+            .to({ scaleX: 1, scaleY: 1 }, 150)
+            .set({ touchEnabled: true });
     };
     return Index;
 }(eui.Component));
 __reflect(Index.prototype, "Index");
-//# sourceMappingURL=Index.js.map

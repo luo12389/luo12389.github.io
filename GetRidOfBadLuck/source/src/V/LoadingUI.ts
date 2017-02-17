@@ -29,11 +29,6 @@
 
 class LoadingUI extends eui.Component {
     public bar: eui.Image;
-    public monster1: eui.Image;
-    public monster2: eui.Image;
-    public monster3: eui.Image;
-    public wing1: eui.Image;
-    public wing2: eui.Image;
     public barText: eui.Label;
 
     public barMask: egret.Rectangle;
@@ -41,31 +36,66 @@ class LoadingUI extends eui.Component {
         super();
         this.skinName = "resource/skins/loading.exml";
 
-        egret.Tween.get(this.monster2, { loop: true })
-            .to({ x: -54 }, 2000)
-            .to({ x: -190 }, 2000);
-        
-        egret.Tween.get(this.monster3, { loop: true })
-            .to({ x: 452 }, 2000)
-            .to({ x: 560 }, 2000);
-        
-        egret.Tween.get(this.monster1, { loop: true })
-            .to({ y: 835 }, 2000)
-            .to({ y: 956 }, 2000);
-        
-        egret.Tween.get(this.wing1, { loop: true })
-            .to({ rotation: 0 }, 300)
-            .to({ rotation: -10 }, 300)
-            .to({ rotation: 0 }, 300)
-            .to({ rotation: -10 }, 300)
-            .wait(1000);
+        //小鸡帧动画
+        let chickPng = RES.getRes("loading_chick_png");
+        let chickJson = RES.getRes("loading_chick_json");
+        let chickMCDF = new egret.MovieClipDataFactory(chickJson, chickPng);
+        let chickMC = new egret.MovieClip(chickMCDF.generateMovieClipData("444"));
+        chickMC.anchorOffsetX = chickMC.width / 2;
+        chickMC.x = 320;
+        chickMC.y = 320;
+        this.addChild(chickMC);
 
-        egret.Tween.get(this.wing2, { loop: true })
-            .to({ rotation: 0 }, 300)
-            .to({ rotation: 10 }, 300)
-            .to({ rotation: 0 }, 300)
-            .to({ rotation: 10 }, 300)
-            .wait(1000);    
+        //怪物1帧动画
+        let monster1Png = RES.getRes("loading_monster1_png");
+        let monster1Json = RES.getRes("loading_monster1_json");
+        let monster1MCDF = new egret.MovieClipDataFactory(monster1Json, monster1Png);
+        let monster1MC = new egret.MovieClip(monster1MCDF.generateMovieClipData("111"));
+        monster1MC.x = 700;
+        monster1MC.y = 300;
+        monster1MC.anchorOffsetX = monster1MC.width;
+        monster1MC.anchorOffsetY = monster1MC.height;
+        monster1MC.rotation = 60;
+        this.addChild(monster1MC);
+
+        //怪物2帧动画
+        let monster2Png = RES.getRes("loading_monster2_png");
+        let monster2Json = RES.getRes("loading_monster2_json");
+        let monster2MCDF = new egret.MovieClipDataFactory(monster2Json, monster2Png);
+        let monster2MC = new egret.MovieClip(monster2MCDF.generateMovieClipData("222"));
+        monster2MC.x = -420;
+        monster2MC.y = 560;
+        this.addChild(monster2MC);
+
+        //怪物3帧动画
+        let monster3Png = RES.getRes("loading_monster3_png");
+        let monster3Json = RES.getRes("loading_monster3_json");
+        let monster3MCDF = new egret.MovieClipDataFactory(monster3Json, monster3Png);
+        let monster3MC = new egret.MovieClip(monster3MCDF.generateMovieClipData("333"));
+        monster3MC.x = 420;
+        monster3MC.y = 1010;
+        this.addChild(monster3MC);
+
+        egret.Tween.get(monster1MC)
+            .wait(300)
+            .to({ rotation: -10 }, 500)
+            .call(() => {
+                monster1MC.play(-1);
+            });
+
+        egret.Tween.get(monster2MC)
+            .to({ x: -290, y: 400 }, 500)
+            .call(() => {
+                monster2MC.play(-1);
+            });
+
+        egret.Tween.get(monster3MC)
+            .wait(600)    
+            .to({ x: 400, y: 780 }, 500)
+            .call(() => {
+                monster3MC.play(-1);
+                  chickMC.play(-1);
+            });
     }
 
     public setProgress(num): void {

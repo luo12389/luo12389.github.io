@@ -14,10 +14,11 @@ var Game = (function (_super) {
     __extends(Game, _super);
     function Game(round, interval, life, skill) {
         var _this = _super.call(this) || this;
-        //当前图片标号
-        _this.curImgNum = 0;
+        _this.bigTimes = 1.02;
+        _this.bigInterval = 250;
+        _this.distance = 5;
         //打败小怪兽次数
-        _this.skillRound = 4;
+        _this.skillRound = 0;
         _this.groupArray = [];
         _this.stateArray = [];
         _this.skinName = "resource/skins/game.exml";
@@ -26,8 +27,13 @@ var Game = (function (_super) {
         return _this;
     }
     Game.prototype.init = function () {
-        //刷新生命
-        this.refreshLife(ViewController.getInstance().life);
+        this.skillRound = ViewController.getInstance().skillRound;
+        var res = this.refreshLife(ViewController.getInstance().life);
+        this.lifeText = new egret.Bitmap(RES.getRes(res));
+        this.lifeText.anchorOffsetX = this.lifeText.width / 2;
+        this.lifeText.x = 165;
+        this.lifeText.y = 32;
+        this.addChild(this.lifeText);
         var groupW = 190;
         var groupH = 290;
         //创建第一个和第二个窗户 固定
@@ -35,14 +41,14 @@ var Game = (function (_super) {
         group1.x = 86.6;
         group1.y = 90;
         this.groupArray.push(group1);
-        var win1 = new eui.Image(this.randomWindow());
+        var win1 = new eui.Image(this.randomWindow(ViewController.getInstance().round));
         group1.addChild(win1);
         this.addChild(group1);
         var group2 = new eui.Group();
         group2.x = 363.2;
         group2.y = 90;
         this.groupArray.push(group2);
-        var win2 = new eui.Image(this.randomWindow());
+        var win2 = new eui.Image(this.randomWindow(ViewController.getInstance().round));
         group2.addChild(win2);
         this.addChild(group2);
         //当回合数大于1时
@@ -61,51 +67,29 @@ var Game = (function (_super) {
                 group.x = groupX;
                 group.y = groupY;
                 this.groupArray.push(group);
-                var win = new eui.Image(this.randomWindow());
+                var win = new eui.Image(this.randomWindow(ViewController.getInstance().round));
                 group.addChild(win);
                 this.addChild(group);
             }
         }
     };
     Game.prototype.start = function () {
-        var _this = this;
-        var _loop_1 = function (i) {
-            var group = this_1.groupArray[i];
-            var showImg = new eui.Image(RES.getRes(this_1.randomChoose()));
-            this_1.setImage(showImg);
-            showImg.scaleX = 0;
-            showImg.scaleY = 0;
-            group.addChildAt(showImg, 0);
-            egret.Tween.get(showImg)
-                .wait(1000)
-                .to({ scaleX: 1, scaleY: 1 }, 1000)
-                .call(function () {
-                var showX = showImg.x;
-                var showY = showImg.y;
-                egret.Tween.get(showImg)
-                    .to({ x: showX - 10 }, 800)
-                    .call(function () {
-                    egret.Tween.get(showImg, { loop: true })
-                        .to({ x: showX }, 500)
-                        .to({ x: showX + 10 }, 500)
-                        .to({ x: showX }, 500)
-                        .to({ x: showX - 10 }, 500);
-                    if (i == _this.groupArray.length - 1) {
-                        //启动触碰事件
-                        _this.addEventListener(egret.TouchEvent.TOUCH_TAP, _this.touchResult, _this);
-                        //启动计时器
-                        _this.timer = new egret.Timer(ViewController.getInstance().interval, 0);
-                        _this.timer.addEventListener(egret.TimerEvent.TIMER, _this.resetImg, _this);
-                        console.log(egret.getTimer());
-                        _this.timer.start();
-                    }
-                });
-            });
-        };
-        var this_1 = this;
+        var time = 300;
         for (var i = 0; i < this.groupArray.length; i++) {
-            _loop_1(i);
+            var group = this.groupArray[i];
+            var json = RES.getRes("chick_json");
+            var png = RES.getRes("chick_png");
+            var mcDataFactory = new egret.MovieClipDataFactory(json, png);
+            console.log(mcDataFactory);
+            var mc = new egret.MovieClip(mcDataFactory.generateMovieClipData("chick"));
+            group.addChildAt(mc, 0);
+            mc.play(-1);
         }
+        this.addEventListener(egret.TouchEvent.TOUCH_TAP, this.touchResult, this);
+        //启动计时器
+        this.timer = new egret.Timer(ViewController.getInstance().interval, 0);
+        this.timer.addEventListener(egret.TimerEvent.TIMER, this.resetImg, this);
+        this.timer.start();
     };
     //触碰处理
     Game.prototype.touchResult = function (e) {
@@ -117,7 +101,6 @@ var Game = (function (_super) {
             if (isHit == true) {
                 if (this.stateArray[i]) {
                     //小怪兽
-                    console.log("小怪兽");
                     //关卡击杀数减1
                     this.skillRound -= 1;
                     ViewController.getInstance().skill += 1;
@@ -127,95 +110,150 @@ var Game = (function (_super) {
                         this.roundResult(ViewController.getInstance().round);
                     }
                     else {
-                        //重置
-                        this.resetImg();
+                        //重置点击图片
+                        this.clickIndexReset(i);
                     }
                 }
                 else {
                     //小鸡
-                    console.log("小鸡");
                     //减去生命
                     ViewController.getInstance().life -= 1;
+                    //生命还有剩余，改变生命图片
+                    var res = this.refreshLife(ViewController.getInstance().life);
+                    this.lifeText.texture = RES.getRes(res);
+                    this.lifeText.anchorOffsetX = this.lifeText.width / 2;
+                    this.lifeText.x = 165;
                     if (ViewController.getInstance().life == 0) {
                         this.passBool = false;
                         this.roundResult(ViewController.getInstance().round);
                     }
                     else {
-                        //生命还有剩余，改变生命图片
-                        this.refreshLife(ViewController.getInstance().life);
-                        //刷新
-                        this.resetImg();
+                        //重置点击图片
+                        this.clickIndexReset(i);
                     }
                 }
             }
         }
     };
+    Game.prototype.clickIndexReset = function (index) {
+        var _this = this;
+        var group = this.groupArray[index];
+        group.removeChildAt(0);
+        var showImg = new egret.Bitmap(RES.getRes(this.randomChoose(index)));
+        this.setWinBitmap(showImg);
+        showImg.scaleX = 0;
+        showImg.scaleY = 0;
+        group.addChildAt(showImg, 0);
+        egret.Tween.get(showImg)
+            .to({ scaleX: 1, scaleY: 1 }, this.bigInterval)
+            .call(function () {
+            var showX = showImg.x;
+            var showY = showImg.y;
+            egret.Tween.get(showImg, { loop: true })
+                .to({ x: showX - _this.distance, scaleX: _this.bigTimes, scaleY: _this.bigTimes }, _this.bigInterval)
+                .to({ x: showX, scaleX: 1, scaleY: 1 }, _this.bigInterval)
+                .to({ x: showX + _this.distance, scaleX: _this.bigTimes, scaleY: _this.bigTimes }, _this.bigInterval)
+                .to({ x: showX, scaleX: 1, scaleY: 1 }, _this.bigInterval);
+        });
+    };
     //重置小鸡或怪兽
     Game.prototype.resetImg = function () {
         var _this = this;
-        //重置当前检测值
-        for (var i = 0; i < this.groupArray.length; i++) {
-            var group = this.groupArray[i];
-            group.removeChildAt(0);
-        }
-        this.timer.reset();
-        console.log("重置");
-        this.stateArray = [];
-        var _loop_2 = function (i) {
-            var group = this_2.groupArray[i];
-            var showImg = new eui.Image(RES.getRes(this_2.randomChoose()));
-            this_2.setImage(showImg);
-            showImg.scaleX = 0;
-            showImg.scaleY = 0;
-            group.addChildAt(showImg, 0);
-            egret.Tween.get(showImg)
-                .to({ scaleX: 1, scaleY: 1 }, 1000, egret.Ease.sineInOut)
-                .wait(300)
-                .call(function () {
-                var showX = showImg.x;
-                var showY = showImg.y;
-                egret.Tween.get(showImg)
-                    .to({ x: showX - 10 }, 800)
+        var randomNum = Math.round(Math.random() * ViewController.getInstance().round);
+        var _loop_1 = function (i) {
+            if (i === randomNum) {
+                var group = this_1.groupArray[i];
+                group.removeChildAt(0);
+                var showImg_1 = new egret.Bitmap(RES.getRes(this_1.randomChoose(i)));
+                this_1.setWinBitmap(showImg_1);
+                showImg_1.scaleX = 0;
+                showImg_1.scaleY = 0;
+                group.addChildAt(showImg_1, 0);
+                egret.Tween.get(showImg_1)
+                    .to({ scaleX: 1, scaleY: 1 }, this_1.bigInterval)
                     .call(function () {
-                    egret.Tween.get(showImg, { loop: true })
-                        .to({ x: showX }, 500)
-                        .to({ x: showX + 10 }, 500)
-                        .to({ x: showX }, 500)
-                        .to({ x: showX - 10 }, 500);
+                    var showX = showImg_1.x;
+                    var showY = showImg_1.y;
+                    egret.Tween.get(showImg_1, { loop: true })
+                        .to({ x: showX - _this.distance, scaleX: _this.bigTimes, scaleY: _this.bigTimes }, _this.bigInterval)
+                        .to({ x: showX, scaleX: 1, scaleY: 1 }, _this.bigInterval)
+                        .to({ x: showX + _this.distance, scaleX: _this.bigTimes, scaleY: _this.bigTimes }, _this.bigInterval)
+                        .to({ x: showX, scaleX: 1, scaleY: 1 }, _this.bigInterval);
                 });
-                if (i == _this.groupArray.length - 1) {
-                    _this.timer.start();
-                    console.log("开始");
-                    console.log(egret.getTimer());
-                }
-            });
+            }
         };
-        var this_2 = this;
+        var this_1 = this;
         for (var i = 0; i < this.groupArray.length; i++) {
-            _loop_2(i);
+            _loop_1(i);
         }
+        //重置当前检测值
+        // egret.Tween.removeAllTweens();
+        // for (let i = 0; i < this.groupArray.length; i++) {
+        //     let group: eui.Group = this.groupArray[i];
+        //     group.removeChildAt(0);
+        // }
+        // this.timer.reset();
+        // this.stateArray = [];
+        // let time = 300;
+        // this.touchEnabled = false;
+        // for (let i = 0; i < this.groupArray.length; i++) {
+        //     let group: eui.Group = this.groupArray[i];
+        //     let showImg = new egret.Bitmap(RES.getRes(this.randomChoose(i)));
+        //     this.setWinBitmap(showImg);
+        //     showImg.scaleX = 0;
+        //     showImg.scaleY = 0;
+        //     group.addChildAt(showImg, 0);
+        //     egret.Tween.get(showImg)
+        //         .wait(time * i)
+        //         .to({ scaleX: 1, scaleY: 1 }, 500, egret.Ease.sineInOut)
+        //         .call(() => {
+        //             let showX = showImg.x;
+        //             let showY = showImg.y;
+        //             egret.Tween.get(showImg)
+        //                 .to({ x: showX - 10 }, 800)
+        //                 .call(() => {
+        //                     egret.Tween.get(showImg, { loop: true })
+        //                         .to({ x: showX, scaleX: 1.05, scaleY: 1.05 }, 500)
+        //                         .to({ x: showX + 10, scaleX: 1, scaleY: 1 }, 500)
+        //                         .to({ x: showX, scaleX: 1.05, scaleY: 1.05 }, 500)
+        //                         .to({ x: showX - 10, scaleX: 1, scaleY: 1 }, 500);
+        //                 });
+        //             if (i == this.groupArray.length - 1) {
+        //                 this.timer.start();
+        //                 this.touchEnabled = true;
+        //             }
+        //         });
+        // }
     };
     //显示当前生命
     Game.prototype.refreshLife = function (life) {
+        var res = "";
         switch (life) {
+            case 0:
+                res = "game_life0_png";
+                break;
             case 1:
-                this.lifeText.source = "game_life1_png";
+                res = "game_life1_png";
                 break;
             case 2:
-                this.lifeText.source = "game_life2_png";
+                res = "game_life2_png";
                 break;
             case 3:
-                this.lifeText.source = "game_life3_png";
+                res = "game_life3_png";
                 break;
             case 4:
-                this.lifeText.source = "game_life4_png";
+                res = "game_life4_png";
+                break;
+            case 5:
+                res = "game_life5_png";
                 break;
         }
+        return res;
     };
     //随机颜色窗户
-    Game.prototype.randomWindow = function () {
+    Game.prototype.randomWindow = function (num) {
         var winName;
-        switch (Math.floor(Math.random() * 6 + 1)) {
+        switch (num) {
             case 1:
                 winName = "game_win1_png";
                 break;
@@ -238,163 +276,113 @@ var Game = (function (_super) {
         return winName;
     };
     //随机颜色怪兽
-    Game.prototype.randomMonster = function () {
+    Game.prototype.randomMonster = function (index) {
         var monster;
         switch (Math.floor(Math.random() * 6 + 1)) {
             case 1:
-                this.curImgNum = 1;
                 monster = "game_monster1_png";
                 break;
             case 2:
-                this.curImgNum = 2;
                 monster = "game_monster2_png";
                 break;
             case 3:
-                this.curImgNum = 3;
                 monster = "game_monster3_png";
                 break;
             case 4:
-                this.curImgNum = 4;
                 monster = "game_monster4_png";
                 break;
             case 5:
-                this.curImgNum = 5;
                 monster = "game_monster5_png";
                 break;
             case 6:
-                this.curImgNum = 6;
                 monster = "game_monster6_png";
                 break;
         }
-        this.stateArray.push(1);
+        this.stateArray.splice(index, 1, 1);
         return monster;
     };
     //随机小鸡
-    Game.prototype.randomChick = function () {
+    Game.prototype.randomChick = function (index) {
         var chick;
-        switch (Math.floor(Math.random() * 3 + 1)) {
+        switch (ViewController.getInstance().round) {
             case 1:
-                this.curImgNum = 7;
+            case 2:
                 chick = "game_chick1_png";
                 break;
-            case 2:
-                this.curImgNum = 8;
-                chick = "game_chick2_png";
-                break;
             case 3:
-                this.curImgNum = 9;
-                chick = "game_chick3_png";
+            case 4:
+                var num1 = Math.floor(Math.random() * 2 + 1);
+                if (num1 == 1) {
+                    chick = "game_chick1_png";
+                }
+                else {
+                    chick = "game_chick2_png";
+                }
+                break;
+            case 5:
+                var num2 = Math.floor(Math.random() * 3 + 1);
+                if (num2 == 1) {
+                    chick = "game_chick1_png";
+                }
+                else if (num2 == 2) {
+                    chick = "game_chick2_png";
+                }
+                else if (num2 == 3) {
+                    chick = "game_chick3_png";
+                }
                 break;
         }
-        this.stateArray.push(0);
+        this.stateArray.splice(index, 1, 0);
         return chick;
     };
     //是小鸡还是怪兽
-    Game.prototype.randomChoose = function () {
-        var precent;
-        switch (ViewController.getInstance().round) {
-            case 1:
-                precent = 2;
-                break;
-            case 2:
-                precent = 3;
-                break;
-            case 3:
-                precent = 4;
-                break;
-            case 4:
-                precent = 5;
-                break;
-            case 5:
-                precent = 6;
-                break;
+    Game.prototype.randomChoose = function (index) {
+        var precent = 1;
+        if (Math.round(Math.random() * precent + 1) == 1) {
+            return this.randomMonster(index);
         }
-        if (Math.floor(Math.random() * precent + 1) == 1) {
-            return this.randomMonster();
-        }
-        return this.randomChick();
+        return this.randomChick(index);
     };
     Game.prototype.nextRound = function () {
         //移除按钮监听
         if (this.nextRound) {
             if (this.nextRoundBtn.hasEventListener(egret.TouchEvent.TOUCH_TAP)) {
-                console.log("下一关监听");
                 this.nextRoundBtn.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.nextRound, this);
             }
         }
         if (this.shareBtn) {
             if (this.shareBtn.hasEventListener(egret.TouchEvent.TOUCH_TAP)) {
-                console.log("分享监听");
                 this.shareBtn.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.share, this);
             }
         }
         if (this.restart) {
             if (this.restart.hasEventListener(egret.TouchEvent.TOUCH_TAP)) {
-                console.log("重新开始监听");
                 this.restart.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.restartGame, this);
             }
         }
         if (this.grayBg) {
             if (this.grayBg.hasEventListener(egret.TouchEvent.TOUCH_TAP)) {
-                console.log("重新开始监听");
                 this.grayBg.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.hideShare, this);
             }
         }
-        console.log(ViewController.getInstance().round);
-        console.log(ViewController.getInstance().life);
-        console.log(ViewController.getInstance().interval);
-        console.log(ViewController.getInstance().skill);
-        ViewController.getInstance().round += 1;
-        ViewController.getInstance().interval -= 800;
-        var viewEvent = new ViewEvent(ViewEvent.CHANGE_SCENE_EVENT);
-        viewEvent.eventType = Game.GAMERUN;
-        ViewController.getInstance().onChangeScene(viewEvent);
+        egret.Tween.get(this.nextRoundBtn)
+            .set({ touchEnabled: false })
+            .to({ scaleX: 0.9, scaleY: 0.9 }, 150)
+            .to({ scaleX: 1, scaleY: 1 }, 150)
+            .call(function () {
+            ViewController.getInstance().round += 1;
+            ViewController.getInstance().skillRound += 3;
+            ViewController.getInstance().interval -= 250;
+            var viewEvent = new ViewEvent(ViewEvent.CHANGE_SCENE_EVENT);
+            viewEvent.eventType = Game.GAMERUN;
+            ViewController.getInstance().onChangeScene(viewEvent);
+        });
     };
-    Game.prototype.setImage = function (image) {
-        var imgW;
-        var imgH;
-        switch (this.curImgNum) {
-            case 1:
-                imgW = 100;
-                imgH = 137;
-                break;
-            case 2:
-                imgW = 121;
-                imgH = 137;
-                break;
-            case 3:
-                imgW = 133;
-                imgH = 137;
-                break;
-            case 4:
-                imgW = 104;
-                imgH = 137;
-                break;
-            case 5:
-                imgW = 144;
-                imgH = 137;
-                break;
-            case 6:
-                imgW = 124;
-                imgH = 137;
-                break;
-            case 7:
-                imgW = 115;
-                imgH = 137;
-                break;
-            case 8:
-                imgW = 157;
-                imgH = 137;
-                break;
-            case 9:
-                imgW = 144;
-                imgH = 137;
-                break;
-        }
-        image.anchorOffsetX = imgW / 2;
-        image.anchorOffsetY = imgH / 2;
-        image.x = 95;
-        image.y = 130 + imgH / 2;
+    Game.prototype.setWinBitmap = function (bitMap) {
+        bitMap.anchorOffsetX = bitMap.width / 2;
+        bitMap.anchorOffsetY = bitMap.height / 2;
+        bitMap.x = 95;
+        bitMap.y = 60 + 130;
     };
     //关卡结果
     Game.prototype.roundResult = function (round) {
@@ -402,13 +390,11 @@ var Game = (function (_super) {
         egret.Tween.removeAllTweens();
         //移除game监听
         if (this.hasEventListener(egret.TouchEvent.TOUCH_TAP)) {
-            console.log("移除点击监听");
             this.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.touchResult, this);
         }
         //暂停计时器
         this.timer.stop();
         if (this.timer.hasEventListener(egret.TimerEvent.TIMER)) {
-            console.log("移除计时监听");
             this.timer.removeEventListener(egret.TimerEvent.TIMER, this.resetImg, this);
         }
         var gray = new egret.Bitmap(RES.getRes("game_gary_png"));
@@ -431,7 +417,10 @@ var Game = (function (_super) {
         this.addChild(alertGroup);
         if (this.passBool) {
             light = new egret.Bitmap(RES.getRes("game_light_png"));
-            light.y = 40;
+            light.anchorOffsetX = light.width / 2;
+            light.anchorOffsetY = light.height / 2;
+            light.x = 250;
+            light.y = 160;
             light.alpha = 0;
             this.setBitmap(light);
             alertGroup.addChild(light);
@@ -497,7 +486,6 @@ var Game = (function (_super) {
                 .call(function () {
                 _this.nextRoundBtn.touchEnabled = true;
                 _this.nextRoundBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, _this.nextRound, _this);
-                console.log("注册监听");
             });
         }
         else if (round == 5 && this.passBool) {
@@ -508,8 +496,8 @@ var Game = (function (_super) {
             this.restart.scaleY = 0;
             alertGroup.addChild(this.restart);
             egret.Tween.get(this.restart)
-                .wait(2000)
-                .to({ scaleX: 1, scaleY: 1 }, 1500, egret.Ease.elasticOut)
+                .wait(2500)
+                .to({ scaleX: 1, scaleY: 1 }, 1000, egret.Ease.elasticOut)
                 .call(function () {
                 _this.restart.touchEnabled = true;
                 _this.restart.addEventListener(egret.TouchEvent.TOUCH_TAP, _this.restartGame, _this);
@@ -521,8 +509,8 @@ var Game = (function (_super) {
             this.shareBtn.scaleY = 0;
             alertGroup.addChild(this.shareBtn);
             egret.Tween.get(this.shareBtn)
-                .wait(2000)
-                .to({ scaleX: 1, scaleY: 1 }, 1500, egret.Ease.elasticOut)
+                .wait(2500)
+                .to({ scaleX: 1, scaleY: 1 }, 1000, egret.Ease.elasticOut)
                 .call(function () {
                 _this.shareBtn.touchEnabled = true;
                 _this.shareBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, _this.share, _this);
@@ -535,6 +523,13 @@ var Game = (function (_super) {
             this.restart.scaleX = 0;
             this.restart.scaleY = 0;
             alertGroup.addChild(this.restart);
+            egret.Tween.get(this.restart)
+                .wait(2500)
+                .to({ scaleX: 1, scaleY: 1 }, 1000, egret.Ease.elasticOut)
+                .call(function () {
+                _this.restart.touchEnabled = true;
+                _this.restart.addEventListener(egret.TouchEvent.TOUCH_TAP, _this.restartGame, _this);
+            });
         }
         if (this.passBool) {
             //出现星星
@@ -580,36 +575,99 @@ var Game = (function (_super) {
                     star5Res = "game_star_light5_png";
                     break;
             }
+            var star1 = new egret.Bitmap();
+            star1.texture = RES.getRes(star1Res);
+            star1.anchorOffsetX = star1.width / 2;
+            star1.anchorOffsetY = star1.height / 2;
+            star1.x = 95;
+            star1.y = 205;
+            star1.scaleX = 0;
+            star1.scaleY = 0;
+            alertGroup.addChild(star1);
+            var star2 = new egret.Bitmap();
+            star2.texture = RES.getRes(star2Res);
+            star2.anchorOffsetX = star2.width / 2;
+            star2.anchorOffsetY = star2.height / 2;
+            star2.x = 165;
+            star2.y = 185;
+            star2.scaleX = 0;
+            star2.scaleY = 0;
+            alertGroup.addChild(star2);
+            var star3 = new egret.Bitmap();
+            star3.texture = RES.getRes(star3Res);
+            star3.anchorOffsetX = star3.width / 2;
+            star3.anchorOffsetY = star3.height / 2;
+            star3.x = 250;
+            star3.y = 170;
+            star3.scaleX = 0;
+            star3.scaleY = 0;
+            alertGroup.addChild(star3);
+            var star4 = new egret.Bitmap();
+            star4.texture = RES.getRes(star4Res);
+            star4.anchorOffsetX = star4.width / 2;
+            star4.anchorOffsetY = star4.height / 2;
+            star4.x = 335;
+            star4.y = 185;
+            star4.scaleX = 0;
+            star4.scaleY = 0;
+            alertGroup.addChild(star4);
+            var star5 = new egret.Bitmap();
+            star5.texture = RES.getRes(star5Res);
+            star5.anchorOffsetX = star5.width / 2;
+            star5.anchorOffsetY = star5.height / 2;
+            star5.x = 405;
+            star5.y = 205;
+            star5.scaleX = 0;
+            star5.scaleY = 0;
+            alertGroup.addChild(star5);
+            egret.Tween.get(star1)
+                .wait(1500)
+                .to({ scaleX: 1, scaleY: 1 }, 800, egret.Ease.elasticOut);
+            egret.Tween.get(star2)
+                .wait(1600)
+                .to({ scaleX: 1, scaleY: 1 }, 800, egret.Ease.elasticOut);
+            egret.Tween.get(star3)
+                .wait(1700)
+                .to({ scaleX: 1, scaleY: 1 }, 800, egret.Ease.elasticOut);
+            egret.Tween.get(star4)
+                .wait(1800)
+                .to({ scaleX: 1, scaleY: 1 }, 800, egret.Ease.elasticOut);
+            egret.Tween.get(star5)
+                .wait(1900)
+                .to({ scaleX: 1, scaleY: 1 }, 800, egret.Ease.elasticOut);
         }
         egret.Tween.get(alertGroup)
             .to({ y: 160 }, 1200, egret.Ease.elasticOut)
             .call(function () {
             if (_this.passBool) {
                 egret.Tween.get(light)
-                    .to({ alpha: 1 }, 500);
+                    .to({ alpha: 1 }, 500)
+                    .call(function () {
+                    egret.Tween.get(light, { loop: true })
+                        .to({ rotation: 360 }, 10000);
+                });
             }
             egret.Tween.get(text)
                 .to({ alpha: 1 }, 500);
         });
-        egret.Tween.get(this.restart)
-            .wait(2000)
-            .to({ scaleX: 1, scaleY: 1 }, 1500, egret.Ease.elasticOut)
-            .call(function () {
-            _this.restart.touchEnabled = true;
-            _this.restart.addEventListener(egret.TouchEvent.TOUCH_TAP, _this.restartGame, _this);
-        });
     };
     Game.prototype.restartGame = function () {
-        console.log("restart");
-        //所有参数重置
-        //跳转页面
-        ViewController.getInstance().round = 1;
-        ViewController.getInstance().interval = 3000;
-        ViewController.getInstance().life = 5;
-        ViewController.getInstance().skill = 0;
-        var viewEvent = new ViewEvent(ViewEvent.CHANGE_SCENE_EVENT);
-        viewEvent.eventType = Game.GAMERUN;
-        ViewController.getInstance().onChangeScene(viewEvent);
+        egret.Tween.get(this.restart)
+            .set({ touchEnabled: false })
+            .to({ scaleX: 0.9, scaleY: 0.9 }, 150)
+            .to({ scaleX: 1, scaleY: 1 }, 150)
+            .call(function () {
+            //所有参数重置
+            //跳转页面
+            ViewController.getInstance().round = 1;
+            ViewController.getInstance().interval = 3000;
+            ViewController.getInstance().life = 3;
+            ViewController.getInstance().skill = 0;
+            ViewController.getInstance().skillRound = 5;
+            var viewEvent = new ViewEvent(ViewEvent.CHANGE_SCENE_EVENT);
+            viewEvent.eventType = Game.GAMERUN;
+            ViewController.getInstance().onChangeScene(viewEvent);
+        });
     };
     Game.prototype.share = function () {
         if (this.grayBg) {
@@ -643,4 +701,3 @@ var Game = (function (_super) {
 }(eui.Component));
 Game.GAMERUN = "run";
 __reflect(Game.prototype, "Game");
-//# sourceMappingURL=Game.js.map

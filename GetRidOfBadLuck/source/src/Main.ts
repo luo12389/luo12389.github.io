@@ -110,9 +110,7 @@ class Main extends eui.UILayer {
      */
     private onResourceLoadComplete(event:RES.ResourceEvent):void {
         if (event.groupName == "preload") {
-
             this.stage.removeChild(this.loading);
-
             RES.removeEventListener(RES.ResourceEvent.GROUP_COMPLETE, this.onResourceLoadComplete, this);
             RES.removeEventListener(RES.ResourceEvent.GROUP_LOAD_ERROR, this.onResourceLoadError, this);
             RES.removeEventListener(RES.ResourceEvent.GROUP_PROGRESS, this.onResourceProgress, this);
@@ -162,6 +160,5 @@ class Main extends eui.UILayer {
      */
     protected startCreateScene(): void {
         this.addChild(ViewController.getInstance());
-
     }
 }

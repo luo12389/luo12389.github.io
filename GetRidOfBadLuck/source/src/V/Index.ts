@@ -4,30 +4,10 @@
  * Index
  */
 class Index extends eui.Component {
-    //标题
-    public title: eui.Image;
-    //翅膀1
-    public wing1: eui.Image;
-    //翅膀2
-    public wing2: eui.Image;
-    //点击
-    public click: eui.Image;
-    //手
-    public hand: eui.Image;
-    //锤子
-    public hammer: eui.Image;
     //规则
     public rule: eui.Image;
-    //小鸡
-    public chick: eui.Image;
-    //小怪兽
-    public monster: eui.Image;
-    //de1
-    public de1: eui.Image;
-    //de2
-    public de2: eui.Image;
-    //group
-    public group: eui.Group;
+    //音乐按钮
+    public musicBtn: eui.Image;
     public constructor() {
         super();
         this.skinName = "resource/skins/index.exml";
@@ -35,73 +15,70 @@ class Index extends eui.Component {
     }
 
     public init() {
-        egret.Tween.get(this.group)
-            .to({ scaleX: 1, scaleY: 1 }, 1000, egret.Ease.elasticOut)
+        let titlePng = RES.getRes("index_title_png");
+        let titleJson = RES.getRes("index_title_json");
+        let titleMCDF = new egret.MovieClipDataFactory(titleJson, titlePng);
+        let titleMC = new egret.MovieClip(titleMCDF.generateMovieClipData("123"))
+        titleMC.anchorOffsetX = titleMC.width / 2;
+        titleMC.anchorOffsetY = titleMC.height / 2;
+        titleMC.x = 330;
+        titleMC.y = 220;
+        titleMC.scaleX = 0;
+        titleMC.scaleY = 0;
+        this.addChild(titleMC);
+
+        egret.Tween.get(titleMC)
+            .to({ scaleX: 1, scaleY: 1 }, 2000, egret.Ease.elasticOut)
             .call(() => {
-                egret.Tween.get(this.wing1, { loop: true })   
-                    .to({ rotation: 0 }, 400)
-                    .to({ rotation: -10 }, 400)
-                    .to({ rotation: 0 }, 400)
-                    .to({ rotation: -10 }, 400);
-
-                egret.Tween.get(this.wing2, { loop: true })
-                    .to({ rotation: 0 }, 400)
-                    .to({ rotation: 10 }, 400)
-                    .to({ rotation: 0 }, 400)
-                    .to({ rotation: 10 }, 400)
-                    .wait(1000);
-
-                egret.Tween.get(this.hammer, { loop: true })
-                    .to({ rotation: 0 }, 500)
-                    .to({ rotation: 10 }, 500);
-
-                egret.Tween.get(this.chick)
-                    .to({ alpha: 1 }, 500)
-                    .call(() => {
-                        let chickX = this.chick.x;
-                        let chickY = this.chick.y;
-                        egret.Tween.get(this.chick, { loop: true })
-                            .to({ x: chickX - 2, y: chickY - 5 }, 800)
-                            .wait(200)
-                            .to({ x: chickX, y: chickY}, 800);
-                    });
-
-                egret.Tween.get(this.monster, { loop: true })
-                    .to({ y: 90 }, 500)
-                    .to({ y: 80 }, 500)
+                titleMC.play(-1);
             });
 
-        egret.Tween.get(this.hand)
-            .wait(1000)
-            .to({ alpha: 1 }, 800)
-            .call(() => {
-                egret.Tween.get(this.hand, { loop: true })
-                    .to({ scaleX: 0.85, scaleY: 0.85 }, 600, egret.Ease.cubicInOut)
-                    .to({ scaleX: 1, scaleY: 1 }, 600)
-                    .to({ scaleX: 0.85, scaleY: 0.85 }, 600, egret.Ease.cubicInOut)
-                    .to({ scaleX: 1, scaleY: 1, alpha: 0 }, 800, egret.Ease.quartInOut)
-                    .wait(500);
-            });
 
-        egret.Tween.get(this.click)
-            .wait(1000)
-            .to({ alpha: 1 }, 800)
-            .call(() => {
-                this.click.touchEnabled = true;
-                this.click.addEventListener(egret.TouchEvent.TOUCH_TAP, this.gameStart, this);
+        let chickPng = RES.getRes("index_de2_png");
+        let chickJson = RES.getRes("index_de2_json");
+        let chickMCDF = new egret.MovieClipDataFactory(chickJson, chickPng);
+        let chickMC = new egret.MovieClip(chickMCDF.generateMovieClipData("777"));
+        chickMC.x = 50;
+        chickMC.y = 430;
+        this.addChild(chickMC);
+        chickMC.play(-1);
 
-                this.rule.touchEnabled = true;
-                this.rule.addEventListener(egret.TouchEvent.TOUCH_TAP, this.ruleInfo, this);
-                egret.Tween.get(this.click, { loop: true })
-                    .set({ touchEnabled: true })
-                    .to({ scaleX: 0.85, scaleY: 0.85 }, 600, egret.Ease.cubicInOut)
-                    .to({ scaleX: 1, scaleY: 1 }, 600)
-                    .to({ scaleX: 0.85, scaleY: 0.85 }, 600, egret.Ease.cubicInOut)
-                    .to({ scaleX: 1, scaleY: 1, alpha: 0 }, 800, egret.Ease.quartInOut)
-                    .set({ touchEnabled: false })
-                    .wait(500);
-            });
+        let monsterPng = RES.getRes("index_de1_png");
+        let monsterJson = RES.getRes("index_de1_json");
+        let monsterMCDF = new egret.MovieClipDataFactory(monsterJson, monsterPng);
+        let monsterMC = new egret.MovieClip(monsterMCDF.generateMovieClipData("666"));
+        monsterMC.x = 590 - monsterMC.width;
+        monsterMC.y = 430;
+        this.addChild(monsterMC);
+        monsterMC.play(-1);
+
+        let clickPng = RES.getRes("index_click_png");
+        let clickJson = RES.getRes("index_click_json");
+        let clickMCDF = new egret.MovieClipDataFactory(clickJson, clickPng);
+        let clickMC = new egret.MovieClip(clickMCDF.generateMovieClipData("888"));
+        clickMC.x = 420;
+        clickMC.y = 650;
+        clickMC.play(-1);
+        this.addChild(clickMC);
+        clickMC.touchEnabled = true;
+        clickMC.addEventListener(egret.TouchEvent.TOUCH_TAP, this.gameStart, this);
+
+        // egret.Tween.get(this.musicBtn, {loop:true})
+        //     .to({ rotation: 360 }, 3000);
+
+        // this.musicBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, this.musicSwitch, this);
+        // this.addEventListener(egret.TouchEvent.TOUCH_TAP, this.stageClick, this);
     }
+
+    // public musicSwitch() {
+    //     if (this.hasEventListener(egret.TouchEvent.TOUCH_TAP)) {
+    //         this.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.stageClick, this);
+    //     }
+    // }
+
+    // public stageClick() {
+
+    // }
 
     public gameStart() {
         let viewEvent = new ViewEvent(ViewEvent.CHANGE_SCENE_EVENT);
@@ -110,6 +87,10 @@ class Index extends eui.Component {
     }
 
     public ruleInfo() {
-        console.log("游戏规则");
+        egret.Tween.get(this.rule)
+            .set({ touchEnabled: false })
+            .to({ scaleX: 0.9, scaleY: 0.9 }, 150)
+            .to({ scaleX: 1, scaleY: 1 }, 150)
+            .set({ touchEnabled: true });
     }
 }

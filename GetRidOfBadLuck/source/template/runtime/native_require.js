@@ -4,6 +4,7 @@ var game_file_list = [
     //----auto game_file_list start----
 	"libs/modules/egret/egret.js",
 	"libs/modules/egret/egret.native.js",
+	"libs/modules/game/game.js",
 	"libs/modules/resourcemanager/resourcemanager.js",
 	"libs/modules/eui/eui.js",
 	"libs/modules/tween/tween.js",
@@ -53,7 +54,7 @@ egret_native.egretStart = function () {
 		contentWidth: 640,
 		contentHeight: 1030,
 		showPaintRect: false,
-		showFPS: false,
+		showFPS: true,
 		fpsStyles: "",
 		showLog: false,
 		logFilter: "",

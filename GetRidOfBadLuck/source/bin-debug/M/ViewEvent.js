@@ -18,4 +18,3 @@ var ViewEvent = (function (_super) {
 }(egret.Event));
 ViewEvent.CHANGE_SCENE_EVENT = "changesceneevent";
 __reflect(ViewEvent.prototype, "ViewEvent");
-//# sourceMappingURL=ViewEvent.js.map

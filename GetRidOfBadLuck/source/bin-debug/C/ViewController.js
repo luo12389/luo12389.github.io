@@ -15,9 +15,10 @@ var ViewController = (function (_super) {
     function ViewController() {
         var _this = _super.call(this) || this;
         _this.round = 1; //回合
-        _this.interval = 5000; //间隔
-        _this.life = 5; //生命
+        _this.interval = 1500; //间隔
+        _this.life = 3; //生命
         _this.skill = 0; //打败怪兽数量
+        _this.skillRound = 5;
         _this.init();
         return _this;
         //游戏音乐预加载
@@ -62,4 +63,3 @@ var ViewController = (function (_super) {
     return ViewController;
 }(egret.Sprite));
 __reflect(ViewController.prototype, "ViewController");
-//# sourceMappingURL=ViewController.js.map
