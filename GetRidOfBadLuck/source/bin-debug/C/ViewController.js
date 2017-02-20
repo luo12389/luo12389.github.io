@@ -15,10 +15,10 @@ var ViewController = (function (_super) {
     function ViewController() {
         var _this = _super.call(this) || this;
         _this.round = 1; //回合
-        _this.interval = 1500; //间隔
-        _this.life = 3; //生命
+        _this.interval = 3000; //间隔
+        _this.life = 5; //生命
         _this.skill = 0; //打败怪兽数量
-        _this.skillRound = 5;
+        _this.skillRound = 1;
         _this.init();
         return _this;
         //游戏音乐预加载
@@ -49,13 +49,13 @@ var ViewController = (function (_super) {
         game.y = -1030;
         var self = this;
         egret.Tween.get(game)
-            .to({ y: 0 }, 2000)
+            .to({ y: 0 }, 2000, egret.Ease.backInOut)
             .call(function () {
             //开启计时器和监听事件
             game.start();
         });
         egret.Tween.get(lastPage)
-            .to({ y: 1030 }, 2000)
+            .to({ y: 1030 }, 2000, egret.Ease.backInOut)
             .call(function () {
             self.removeChildAt(0);
         });
@@ -63,3 +63,4 @@ var ViewController = (function (_super) {
     return ViewController;
 }(egret.Sprite));
 __reflect(ViewController.prototype, "ViewController");
+//# sourceMappingURL=ViewController.js.map

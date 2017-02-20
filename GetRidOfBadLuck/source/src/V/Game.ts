@@ -29,8 +29,16 @@ class Game extends eui.Component {
     public distance = 5;
     //打败小怪兽次数
     public skillRound = 0;
-    public groupArray = [];
-    public stateArray = [];
+    //组数组
+    public groupArray: eui.Group[] = [];
+    //状态数组
+    public stateArray: number[] = [];
+    //json数组
+    public jsonResArray: string[] = ["game_chick1_json", "game_chick2_json", "game_chick3_json", "game_monster1_json", "game_monster2_json", "game_monster3_json", "game_monster4_json", "game_monster5_json", "game_monster6_json"];
+    //png数组
+    public pngResArray: string[] = ["game_chick1_png", "game_chick2_png", "game_chick3_png", "game_monster1_png", "game_monster2_png", "game_monster3_png", "game_monster4_png", "game_monster5_png", "game_monster6_png"];
+    //mc名字数组
+    public nameResArray: string[] = ["1111", "8888", "9999", "2222", "3333", "4444", "5555", "6666", "7777"];
     public static GAMERUN = "run";
     public constructor(round, interval, life, skill) {
         super();
@@ -38,8 +46,6 @@ class Game extends eui.Component {
         //初始化界面
         this.init();
     }
-
-
 
     public init() {
         this.skillRound = ViewController.getInstance().skillRound;
@@ -62,7 +68,6 @@ class Game extends eui.Component {
         group1.addChild(win1);
         this.addChild(group1);
 
-
         let group2 = new eui.Group();
         group2.x = 363.2;
         group2.y = 90;
@@ -80,7 +85,7 @@ class Game extends eui.Component {
                 // 计算行号  和   列号  
                 let row = Math.floor(index / 2);
                 let col = index % 2;
-                //根据行号和列号来确定 子控件的坐标  
+                //根据行号和列号来确定子控件的坐标  
                 let groupX = marginX + col * (groupW + marginX);
                 let groupY = 400 + row * (groupH + marginY);
                 let group = new eui.Group();
@@ -98,11 +103,11 @@ class Game extends eui.Component {
         let time = 300;
         for (let i = 0; i < this.groupArray.length; i++) {
             let group: eui.Group = this.groupArray[i];
-            let json = RES.getRes("chick_json");
-            let png = RES.getRes("chick_png");
-            let mcDataFactory = new egret.MovieClipDataFactory(json, png);
-            console.log(mcDataFactory);
-            let mc: egret.MovieClip = new egret.MovieClip(mcDataFactory.generateMovieClipData("chick"));
+            let resArray = this.randomResult(index);
+            let json = RES.getRes(resArray[0]);
+            let png = RES.getRes(resArray[1]);
+            let mcData = new egret.MovieClipDataFactory(json, png);
+            let mc = new egret.MovieClip(mcData.generateMovieClipData(resArray[2]));
             group.addChildAt(mc, 0);
             mc.play(-1);
         }
@@ -117,22 +122,22 @@ class Game extends eui.Component {
     public touchResult(e: egret.TouchEvent) {
         for (let i = 0; i < this.groupArray.length; i++) {
             let group: eui.Group = this.groupArray[i];
-            let img = group.getChildAt(0);
-            let isHit: boolean = img.hitTestPoint(e.stageX, e.stageY, true);
+            let mc = group.getChildAt(0);
+            let isHit: boolean = mc.hitTestPoint(e.stageX, e.stageY, true);
             //假如点击成功
             if (isHit == true) {
-                if (this.stateArray[i]) {
+                if (!this.stateArray[i]) {
                     //小怪兽
                     //关卡击杀数减1
                     this.skillRound -= 1;
                     ViewController.getInstance().skill += 1;
+                    console.log("击杀怪兽");
                     if (this.skillRound == 0) {
                         //本关结果
                         this.passBool = true;
                         this.roundResult(ViewController.getInstance().round);
                     }
                     else {
-                        //重置点击图片
                         this.clickIndexReset(i);
                     }
                 }
@@ -145,12 +150,12 @@ class Game extends eui.Component {
                     this.lifeText.texture = RES.getRes(res);
                     this.lifeText.anchorOffsetX = this.lifeText.width / 2;
                     this.lifeText.x = 165;
+                    console.log("小鸡");
                     if (ViewController.getInstance().life == 0) {
                         this.passBool = false;
                         this.roundResult(ViewController.getInstance().round);
                     }
                     else {
-                        //重置点击图片
                         this.clickIndexReset(i);
                     }
                 }
@@ -161,91 +166,46 @@ class Game extends eui.Component {
     public clickIndexReset(index: number) {
         let group: eui.Group = this.groupArray[index];
         group.removeChildAt(0);
-        let showImg = new egret.Bitmap(RES.getRes(this.randomChoose(index)));
-        this.setWinBitmap(showImg);
-        showImg.scaleX = 0;
-        showImg.scaleY = 0;
-        group.addChildAt(showImg, 0);
-
-        egret.Tween.get(showImg)
-            .to({ scaleX: 1, scaleY: 1 }, this.bigInterval)
-            .call(() => {
-                let showX = showImg.x;
-                let showY = showImg.y;
-                egret.Tween.get(showImg, { loop: true })
-                    .to({ x: showX - this.distance, scaleX: this.bigTimes, scaleY: this.bigTimes }, this.bigInterval)
-                    .to({ x: showX, scaleX: 1, scaleY: 1 }, this.bigInterval)
-                    .to({ x: showX + this.distance, scaleX: this.bigTimes, scaleY: this.bigTimes }, this.bigInterval)
-                    .to({ x: showX, scaleX: 1, scaleY: 1 }, this.bigInterval);
-            });
+        let resArray = this.randomResult(index);
+        let json = RES.getRes(resArray[0]);
+        let png = RES.getRes(resArray[1]);
+        let mcData = new egret.MovieClipDataFactory(json, png);
+        let mc = new egret.MovieClip(mcData.generateMovieClipData(resArray[2]));
+        group.addChildAt(mc, 0);
+        mc.play(-1);
     }
 
     //重置小鸡或怪兽
     public resetImg() {
-        let randomNum = Math.round(Math.random() * ViewController.getInstance().round);
         for (let i = 0; i < this.groupArray.length; i++) {
-            if (i === randomNum) {
-                let group: eui.Group = this.groupArray[i];
-                group.removeChildAt(0);
-                let showImg = new egret.Bitmap(RES.getRes(this.randomChoose(i)));
-                this.setWinBitmap(showImg);
-                showImg.scaleX = 0;
-                showImg.scaleY = 0;
-                group.addChildAt(showImg, 0);
-
-                egret.Tween.get(showImg)
-                    .to({ scaleX: 1, scaleY: 1 }, this.bigInterval)
-                    .call(() => {
-                        let showX = showImg.x;
-                        let showY = showImg.y;
-                        egret.Tween.get(showImg, { loop: true })
-                            .to({ x: showX - this.distance, scaleX: this.bigTimes, scaleY: this.bigTimes }, this.bigInterval)
-                            .to({ x: showX, scaleX: 1, scaleY: 1 }, this.bigInterval)
-                            .to({ x: showX + this.distance, scaleX: this.bigTimes, scaleY: this.bigTimes }, this.bigInterval)
-                            .to({ x: showX, scaleX: 1, scaleY: 1 }, this.bigInterval);
-                    });
-            }
+            let group: eui.Group = this.groupArray[i];
+            group.removeChildAt(0);
+            let resArray = this.randomResult(i);
+            let json = RES.getRes(resArray[0]);
+            let png = RES.getRes(resArray[1]);
+            let mcData = new egret.MovieClipDataFactory(json, png);
+            let mc = new egret.MovieClip(mcData.generateMovieClipData(resArray[2]));
+            group.addChildAt(mc, 0);
+            mc.play(-1);
         }
-        //重置当前检测值
-        // egret.Tween.removeAllTweens();
-        // for (let i = 0; i < this.groupArray.length; i++) {
-        //     let group: eui.Group = this.groupArray[i];
-        //     group.removeChildAt(0);
-        // }
-        // this.timer.reset();
-        // this.stateArray = [];
-        // let time = 300;
-        // this.touchEnabled = false;
+        this.timer.reset();
+        this.timer.start();
+    }
 
-        // for (let i = 0; i < this.groupArray.length; i++) {
-        //     let group: eui.Group = this.groupArray[i];
-        //     let showImg = new egret.Bitmap(RES.getRes(this.randomChoose(i)));
-        //     this.setWinBitmap(showImg);
-        //     showImg.scaleX = 0;
-        //     showImg.scaleY = 0;
-        //     group.addChildAt(showImg, 0);
-
-        //     egret.Tween.get(showImg)
-        //         .wait(time * i)
-        //         .to({ scaleX: 1, scaleY: 1 }, 500, egret.Ease.sineInOut)
-        //         .call(() => {
-        //             let showX = showImg.x;
-        //             let showY = showImg.y;
-        //             egret.Tween.get(showImg)
-        //                 .to({ x: showX - 10 }, 800)
-        //                 .call(() => {
-        //                     egret.Tween.get(showImg, { loop: true })
-        //                         .to({ x: showX, scaleX: 1.05, scaleY: 1.05 }, 500)
-        //                         .to({ x: showX + 10, scaleX: 1, scaleY: 1 }, 500)
-        //                         .to({ x: showX, scaleX: 1.05, scaleY: 1.05 }, 500)
-        //                         .to({ x: showX - 10, scaleX: 1, scaleY: 1 }, 500);
-        //                 });
-        //             if (i == this.groupArray.length - 1) {
-        //                 this.timer.start();
-        //                 this.touchEnabled = true;
-        //             }
-        //         });
-        // }
+    //随机小鸡或怪兽
+    public randomResult(arrayIndex) {
+        let state = Math.floor(Math.random() * (ViewController.getInstance().round + 1));
+        let index: number;
+        if (state === 0) {
+            this.stateArray.splice(arrayIndex, 0, 0);
+            index = Math.floor(Math.random() * 6 + 3);
+        }
+        else {
+            this.stateArray.splice(arrayIndex, 0, 1);
+            index = Math.floor(Math.random() * 3);
+            console.log(index);
+        }
+        return [this.jsonResArray[index], this.pngResArray[index], this.nameResArray[index]];
     }
 
     //显示当前生命
@@ -300,77 +260,6 @@ class Game extends eui.Component {
         return winName;
     }
 
-    //随机颜色怪兽
-    public randomMonster(index) {
-        let monster: string;
-        switch (Math.floor(Math.random() * 6 + 1)) {
-            case 1:
-                monster = "game_monster1_png"
-                break;
-            case 2:
-                monster = "game_monster2_png"
-                break;
-            case 3:
-                monster = "game_monster3_png"
-                break;
-            case 4:
-                monster = "game_monster4_png"
-                break;
-            case 5:
-                monster = "game_monster5_png"
-                break;
-            case 6:
-                monster = "game_monster6_png"
-                break;
-        }
-        this.stateArray.splice(index, 1, 1);
-        return monster;
-    }
-
-    //随机小鸡
-    public randomChick(index) {
-        let chick: string;
-        switch (ViewController.getInstance().round) {
-            case 1:
-            case 2:
-                chick = "game_chick1_png"
-                break;
-            case 3:
-            case 4:
-                let num1 = Math.floor(Math.random() * 2 + 1)
-                if (num1 == 1) {
-                    chick = "game_chick1_png"
-                }
-                else {
-                    chick = "game_chick2_png"
-                }
-                break;
-            case 5:
-                let num2 = Math.floor(Math.random() * 3 + 1)
-                if (num2 == 1) {
-                    chick = "game_chick1_png"
-                }
-                else if (num2 == 2) {
-                    chick = "game_chick2_png"
-                }
-                else if (num2 == 3) {
-                    chick = "game_chick3_png"
-                }
-                break;
-        }
-        this.stateArray.splice(index, 1, 0);
-        return chick;
-    }
-
-    //是小鸡还是怪兽
-    public randomChoose(index) {
-        let precent = 1;
-        if (Math.round(Math.random() * precent + 1) == 1) {
-            return this.randomMonster(index);
-        }
-        return this.randomChick(index);
-    }
-
     public nextRound() {
         //移除按钮监听
         if (this.nextRound) {
@@ -400,14 +289,13 @@ class Game extends eui.Component {
             .to({ scaleX: 1, scaleY: 1 }, 150)
             .call(() => {
                 ViewController.getInstance().round += 1;
-                ViewController.getInstance().skillRound += 3;
-                ViewController.getInstance().interval -= 250;
+                ViewController.getInstance().skillRound = 1;
+                ViewController.getInstance().interval -= 500;
                 let viewEvent = new ViewEvent(ViewEvent.CHANGE_SCENE_EVENT);
                 viewEvent.eventType = Game.GAMERUN;
+                console.log(ViewController.getInstance().interval);
                 ViewController.getInstance().onChangeScene(viewEvent);
             });
-
-
     }
 
     public setWinBitmap(bitMap: egret.Bitmap) {
@@ -419,7 +307,11 @@ class Game extends eui.Component {
 
     //关卡结果
     public roundResult(round: number) {
-        egret.Tween.removeAllTweens();
+
+        for (let i = 0; i < this.groupArray.length; i++) {
+            let group: eui.Group = this.groupArray[i];
+            group.removeChildAt(0);
+        }
         //移除game监听
         if (this.hasEventListener(egret.TouchEvent.TOUCH_TAP)) {
             this.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.touchResult, this);
@@ -503,6 +395,7 @@ class Game extends eui.Component {
         alert = new egret.Bitmap(RES.getRes(alertImg));
         alert.y = 50;
         this.setBitmap(alert);
+        console.log(alert);
         alertGroup.addChildAt(alert, 0);
 
         title = new egret.Bitmap(RES.getRes(titleImg));
@@ -714,9 +607,9 @@ class Game extends eui.Component {
                 //跳转页面
                 ViewController.getInstance().round = 1;
                 ViewController.getInstance().interval = 3000;
-                ViewController.getInstance().life = 3;
+                ViewController.getInstance().life = 5;
                 ViewController.getInstance().skill = 0;
-                ViewController.getInstance().skillRound = 5;
+                ViewController.getInstance().skillRound = 3;
 
                 let viewEvent = new ViewEvent(ViewEvent.CHANGE_SCENE_EVENT);
                 viewEvent.eventType = Game.GAMERUN;

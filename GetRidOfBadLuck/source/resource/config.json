@@ -179,8 +179,9 @@
 			"index_de2_png",
 			"index_muting_png",
 			"index_title_json",
+			"index_voice_png",
 			"index_title_png",
-			"index_voice_png"
+			"game_alert_png"
 		],
 		"loading": [
 			"loading_bar_png",

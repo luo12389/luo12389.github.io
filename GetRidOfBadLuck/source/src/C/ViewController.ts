@@ -5,10 +5,10 @@
 class ViewController extends egret.Sprite {
     private static instance: ViewController;
     public round = 1; //回合
-    public interval = 1500;  //间隔
-    public life = 3;  //生命
+    public interval = 3000;  //间隔
+    public life = 5;  //生命
     public skill = 0; //打败怪兽数量
-    public skillRound = 5;
+    public skillRound = 1;
 
     public constructor() {
         super();
@@ -47,13 +47,13 @@ class ViewController extends egret.Sprite {
         game.y = -1030;
         let self = this;
         egret.Tween.get(game)
-            .to({ y: 0 }, 2000)
+            .to({ y: 0 }, 2000, egret.Ease.backInOut)
             .call(() => {
                 //开启计时器和监听事件
                 game.start();
             });
         egret.Tween.get(lastPage)
-            .to({ y: 1030 }, 2000)
+            .to({ y: 1030 }, 2000, egret.Ease.backInOut)
             .call(() => {
                 self.removeChildAt(0);
             });

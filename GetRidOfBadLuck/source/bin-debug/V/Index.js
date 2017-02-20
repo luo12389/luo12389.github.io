@@ -30,11 +30,6 @@ var Index = (function (_super) {
         titleMC.scaleX = 0;
         titleMC.scaleY = 0;
         this.addChild(titleMC);
-        egret.Tween.get(titleMC)
-            .to({ scaleX: 1, scaleY: 1 }, 2000, egret.Ease.elasticOut)
-            .call(function () {
-            titleMC.play(-1);
-        });
         var chickPng = RES.getRes("index_de2_png");
         var chickJson = RES.getRes("index_de2_json");
         var chickMCDF = new egret.MovieClipDataFactory(chickJson, chickPng);
@@ -42,7 +37,6 @@ var Index = (function (_super) {
         chickMC.x = 50;
         chickMC.y = 430;
         this.addChild(chickMC);
-        chickMC.play(-1);
         var monsterPng = RES.getRes("index_de1_png");
         var monsterJson = RES.getRes("index_de1_json");
         var monsterMCDF = new egret.MovieClipDataFactory(monsterJson, monsterPng);
@@ -50,17 +44,24 @@ var Index = (function (_super) {
         monsterMC.x = 590 - monsterMC.width;
         monsterMC.y = 430;
         this.addChild(monsterMC);
-        monsterMC.play(-1);
         var clickPng = RES.getRes("index_click_png");
         var clickJson = RES.getRes("index_click_json");
         var clickMCDF = new egret.MovieClipDataFactory(clickJson, clickPng);
         var clickMC = new egret.MovieClip(clickMCDF.generateMovieClipData("888"));
         clickMC.x = 420;
         clickMC.y = 650;
-        clickMC.play(-1);
         this.addChild(clickMC);
         clickMC.touchEnabled = true;
         clickMC.addEventListener(egret.TouchEvent.TOUCH_TAP, this.gameStart, this);
+        chickMC.play(-1);
+        clickMC.play(-1);
+        monsterMC.play(-1);
+        egret.Tween.get(titleMC)
+            .wait(500)
+            .to({ scaleX: 1, scaleY: 1 }, 2000, egret.Ease.elasticOut)
+            .call(function () {
+            titleMC.play(-1);
+        });
         // egret.Tween.get(this.musicBtn, {loop:true})
         //     .to({ rotation: 360 }, 3000);
         // this.musicBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, this.musicSwitch, this);
@@ -88,3 +89,4 @@ var Index = (function (_super) {
     return Index;
 }(eui.Component));
 __reflect(Index.prototype, "Index");
+//# sourceMappingURL=Index.js.map
