@@ -36,12 +36,6 @@ var Game = (function (_super) {
     }
     Game.prototype.init = function () {
         this.skillRound = ViewController.getInstance().skillRound;
-        var res = this.refreshLife(ViewController.getInstance().life);
-        this.lifeText = new egret.Bitmap(RES.getRes(res));
-        this.lifeText.anchorOffsetX = this.lifeText.width / 2;
-        this.lifeText.x = 165;
-        this.lifeText.y = 32;
-        this.addChild(this.lifeText);
         var groupW = 190;
         var groupH = 290;
         //创建第一个和第二个窗户 固定
@@ -125,13 +119,7 @@ var Game = (function (_super) {
                 else {
                     //小鸡
                     //减去生命
-                    ViewController.getInstance().life -= 1;
                     //生命还有剩余，改变生命图片
-                    var res = this.refreshLife(ViewController.getInstance().life);
-                    this.lifeText.texture = RES.getRes(res);
-                    this.lifeText.anchorOffsetX = this.lifeText.width / 2;
-                    this.lifeText.x = 165;
-                    console.log("小鸡");
                     if (ViewController.getInstance().life == 0) {
                         this.passBool = false;
                         this.roundResult(ViewController.getInstance().round);
@@ -184,31 +172,6 @@ var Game = (function (_super) {
             console.log(index);
         }
         return [this.jsonResArray[index], this.pngResArray[index], this.nameResArray[index]];
-    };
-    //显示当前生命
-    Game.prototype.refreshLife = function (life) {
-        var res = "";
-        switch (life) {
-            case 0:
-                res = "game_life0_png";
-                break;
-            case 1:
-                res = "game_life1_png";
-                break;
-            case 2:
-                res = "game_life2_png";
-                break;
-            case 3:
-                res = "game_life3_png";
-                break;
-            case 4:
-                res = "game_life4_png";
-                break;
-            case 5:
-                res = "game_life5_png";
-                break;
-        }
-        return res;
     };
     //随机颜色窗户
     Game.prototype.randomWindow = function (num) {

@@ -3,5 +3,9 @@
 	<w:Config id="15a1d2873d8"/>
 	<e:Image x="1" y="0" source="game_bg_png"/>
 	<e:Image id="voiceBtn" source="game_voice_png" x="558" y="8" anchorOffsetX="0"/>
-	<e:Image id="lifeBox" source="game_lifeBox_png" x="0" y="0"/>
+	<e:Image id="lifeBox" source="game_lifeBox_png" x="0" y="0" scaleX="0.8" scaleY="0.8"/>
+	<e:Image source="game_life0_png" x="276" y="9"/>
+	<e:Image source="game_life1_png" x="315" y="8"/>
+	<e:Image source="game_life2_png" x="340" y="8"/>
+	<e:Image source="game_life3_png" x="367" y="8"/>
 </e:Skin>

@@ -5,7 +5,7 @@
 class Game extends eui.Component {
 
     //生命文字
-    public lifeText: egret.Bitmap;
+    public lifeText: egret.BitmapFont;
 
     //下一关
     public nextRoundBtn: egret.Bitmap;
@@ -50,12 +50,6 @@ class Game extends eui.Component {
     public init() {
         this.skillRound = ViewController.getInstance().skillRound;
 
-        let res: string = this.refreshLife(ViewController.getInstance().life);
-        this.lifeText = new egret.Bitmap(RES.getRes(res));
-        this.lifeText.anchorOffsetX = this.lifeText.width / 2;
-        this.lifeText.x = 165;
-        this.lifeText.y = 32;
-        this.addChild(this.lifeText);
 
         let groupW = 190;
         let groupH = 290;
@@ -144,13 +138,7 @@ class Game extends eui.Component {
                 else {
                     //小鸡
                     //减去生命
-                    ViewController.getInstance().life -= 1;
                     //生命还有剩余，改变生命图片
-                    let res = this.refreshLife(ViewController.getInstance().life);
-                    this.lifeText.texture = RES.getRes(res);
-                    this.lifeText.anchorOffsetX = this.lifeText.width / 2;
-                    this.lifeText.x = 165;
-                    console.log("小鸡");
                     if (ViewController.getInstance().life == 0) {
                         this.passBool = false;
                         this.roundResult(ViewController.getInstance().round);
@@ -206,32 +194,6 @@ class Game extends eui.Component {
             console.log(index);
         }
         return [this.jsonResArray[index], this.pngResArray[index], this.nameResArray[index]];
-    }
-
-    //显示当前生命
-    public refreshLife(life: number) {
-        let res = "";
-        switch (life) {
-            case 0:
-                res = "game_life0_png";
-                break;
-            case 1:
-                res = "game_life1_png";
-                break;
-            case 2:
-                res = "game_life2_png";
-                break;
-            case 3:
-                res = "game_life3_png";
-                break;
-            case 4:
-                res = "game_life4_png";
-                break;
-            case 5:
-                res = "game_life5_png";
-                break;
-        }
-        return res;
     }
 
     //随机颜色窗户
